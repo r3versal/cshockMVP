@@ -1,0 +1,136 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/CS.Business.csproj": {}
+  },
+  "projects": {
+    "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/CS.Business.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/CS.Business.csproj",
+        "projectName": "CS.Business",
+        "projectPath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/CS.Business.csproj",
+        "packagesPath": "/Users/Carmen/.nuget/packages/",
+        "outputPath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/Carmen/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard1.6"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard1.6": {
+            "projectReferences": {
+              "/Users/Carmen/Downloads/CS.Platform-main/CS.Common/CS.Common.csproj": {
+                "projectPath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Common/CS.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1605"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard1.6": {
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[1.50.2, )"
+            },
+            "Microsoft.Extensions.Configuration.Ini": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "Microsoft.Extensions.Configuration.Xml": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "NETStandard.Library": {
+              "target": "Package",
+              "version": "[1.6.0, )",
+              "autoReferenced": true
+            },
+            "System.Data.Common": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "imports": [
+            "dnxcore50"
+          ],
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/Carmen/Downloads/CS.Platform-main/CS.Common/CS.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/Carmen/Downloads/CS.Platform-main/CS.Common/CS.Common.csproj",
+        "projectName": "CS.Common",
+        "projectPath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Common/CS.Common.csproj",
+        "packagesPath": "/Users/Carmen/.nuget/packages/",
+        "outputPath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Common/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/Carmen/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard1.6"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard1.6": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1605"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard1.6": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+              "target": "Package",
+              "version": "[1.1.1, )"
+            },
+            "Microsoft.Extensions.Configuration.Xml": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "NETStandard.Library": {
+              "target": "Package",
+              "version": "[1.6.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "dnxcore50"
+          ],
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

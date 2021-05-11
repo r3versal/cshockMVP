@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="EVR.Business/Handlers/CandidateHandler.cs">
+    <Files>
+      <File FileName="EVR.Common/Models/Candidate.cs" Line="14" Column="50" />
+      <File FileName="EVR.API/Controllers/CandidateController.cs" Line="34" Column="1" />
+      <File FileName="EVR.Business/Handlers/CandidateHandler.cs" Line="31" Column="37" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="EVR.Platform" expanded="True">
+            <Node name="API" expanded="True">
+              <Node name="EVR.API" expanded="True">
+                <Node name="Controllers" expanded="True" />
+                <Node name="Security" expanded="True" />
+              </Node>
+              <Node name="EVR.Business" expanded="True">
+                <Node name="Handlers" expanded="True">
+                  <Node name="CandidateHandler.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.API.EVR.API PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <Debugger.DebugSourceFolders />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <AuthorInfo Name="Carmen Shaw" Email="carmen@codeandcandor.dev" Copyright="" Company="Code &amp; Candor" Trademark="" />
+</Properties>

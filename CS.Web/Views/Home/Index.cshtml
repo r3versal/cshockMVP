@@ -1,0 +1,38 @@
+﻿
+<h1>Register</h1>
+<form name="registerForm" id="register-form" class="padding white" method="post" asp-controller="Home" asp-action="Submit">
+    <div>Email:</div><input type="text" name="email">
+    <div>Password:</div><input type="text" name="password">
+    <button type="submit">Register</button>
+</form>
+
+<script>
+   $('#register-form').submit(function (e) {
+        e.preventDefault();
+
+        function getFormData() {
+            var data = {};
+            data.info = [];
+
+            var email = $(element).find('input[name=email]').val()
+            var password = $(element).find('input[name=password]').val()
+            
+            return JSON.stringify(data);
+        }
+        $.ajax({
+            url: '/Home/Submit',
+            type: 'POST',
+            data: { 'jsonData': getFormData() },
+            dataType: 'JSON',
+            success: function (data) {
+                console.log('success callback');
+                window.location.reload();
+            },
+            error: function (xhr, error) {
+                $('#errMsg').html(xhr.responseText);
+                console.log(xhr);
+                console.log(error);
+            }
+        });
+    });
+</script>
