@@ -1,0 +1,44 @@
+# Docs for the Azure Web Apps Deploy action: https://go.microsoft.com/fwlink/?linkid=2134798
+# More GitHub Actions for Azure: https://go.microsoft.com/fwlink/?linkid=2135048
+
+name: Azure App Service Deployment - cshock-api-mvp
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+
+    steps:
+    # checkout the repo
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@master
+      
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.1.5
+      with:
+        node-version: '12.x'
+    - run: npm install -g bower
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '2.1.807'
+
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+
+    - name: dotnet publish
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+    - name: Run Azure webapp deploy action using publish profile credentials
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: cshock-api-mvp
+        slot-name: Production
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_794E2F27CAA949F59F0EE6FB8FC47E96 }}
+        package: ${{env.DOTNET_ROOT}}/myapp
+
