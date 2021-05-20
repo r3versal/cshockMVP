@@ -14,30 +14,43 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@master
-
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2.1.5
-      with:
-        node-version: '12.x'
-    - run: npm install -g bower
+    - uses: actions/checkout@v2
 
     - name: Set up .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '2.1.807'   
+        dotnet-version: '2.1.807'
 
     - name: Build with dotnet
       run: dotnet build --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish CS.API/CS.API.csproj -c Release -f netcoreapp2.1 -o ${{env.DOTNET_ROOT}}\myapp
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
+      with:
+        name: .net-app
+        path: ${{env.DOTNET_ROOT}}/myapp
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: .net-app
 
     - name: Deploy to Azure Web App
+      id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'cshockMVP'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4af3e63f99594ea38e67ff4281fcd196 }}
-        package: ${{env.DOTNET_ROOT}}\myapp
-
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_80130561c10540c5a36ed751d3818d9e }}
+        package: .
