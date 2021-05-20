@@ -36,32 +36,13 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: .net-app
-        path: ${{env.DOTNET_ROOT}}/myapp
-
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: .net-app
+      run: dotnet publish CS.API/CS.API.csproj -c Release -f netcoreapp2.1 -o ${{env.DOTNET_ROOT}}/myapp
 
     - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'cshockMVP'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4af3e63f99594ea38e67ff4281fcd196 }}
-        package: .
+    uses: azure/webapps-deploy@v2
+    with:
+      app-name: 'cshockMVP'
+      slot-name: 'production'
+      publish-profile: ${{ secrets.AzureAppService_PublishProfile_4af3e63f99594ea38e67ff4281fcd196 }}
+      package: ${{env.DOTNET_ROOT}}/myapp
+
