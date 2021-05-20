@@ -27,6 +27,11 @@ jobs:
       with:
         dotnet-version: '2.1.807'
 
+    - name: Set up 1.0 .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '1.0.x'    
+
     - name: Build with dotnet
       run: dotnet build --configuration Release
 
