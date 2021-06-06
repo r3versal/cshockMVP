@@ -7,6 +7,7 @@ namespace CS.Common.Models
     {
         public Guid OrderItemId { get; set; }
         public Guid CustomerId { get; set; }
+        public DateTime CreatedOn { get; set; }
         public Guid OrderId { get; set; }
         public Guid ListingId { get; set; }
         public bool IsStarted { get; set; }

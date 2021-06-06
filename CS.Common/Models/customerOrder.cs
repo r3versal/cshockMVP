@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace CS.Common.Models
 {
-    public class Order
+    public class CustomerOrder
     {
         public Guid OrderId { get; set; }
         public Guid UserId { get; set; }
         public string OrderNumber { get; set; }
-        public Guid StoreId { get; set; }
         public Guid CustomerId { get; set; }
         public Guid BillingAddressId { get; set; }
         public Guid ShippingAddressId { get; set; }
@@ -30,6 +29,6 @@ namespace CS.Common.Models
         public bool IsFeatured { get; set; }
         public Guid ReviewId { get; set; }
         public string DeliveryTrackingId { get; set; }
-        public List<OrderItem> orderItems {get; set;}
+        public List<OrderItem> orderItems { get; set; }
     }
 }

@@ -76,8 +76,14 @@ namespace CS.API.Controllers
                     {
                         return StatusCode(505, "An unexpected error has ocurred, unable to create Customer");
                     }
-                    
-                    var measurements = await MeasurementsHandler.InsertMeasurments(customerDataModel, customer.MeasurementsId);
+
+                    var address = await AddressHandler.InsertAddress(customerDataModel);
+                    if (address == null)
+                    {
+                        return StatusCode(505, "An unexpected error has ocurred, unable to create Customer");
+                    }
+
+                    var measurements = await MeasurementsHandler.InsertMeasurments(customerDataModel, customer.MeasurementsId, customerDataModel.measurements.UserId);
                     if (measurements == null)
                     {
                         return StatusCode(505, "An unexpected error has ocurred, unable to create Customer measurements");
@@ -94,7 +100,7 @@ namespace CS.API.Controllers
                     }
                     else
                     {
-                        newCODM.orderItems = order;
+                        newCODM.order = order;
                     }
 
                     return Ok(newCODM);
@@ -194,25 +200,70 @@ namespace CS.API.Controllers
         #endregion
 
         #region Get Customer Profile
-        [HttpPost("getcustomerprofile")]
-        public async Task<IActionResult> GetCustomerProfile([FromBody] string email)
+        [HttpPost("update")]
+        public async Task<IActionResult> UpdateCustomer([FromBody] Measurements measurements)
         {
             try
             {
-                if (email != null && email != string.Empty)
+                if (measurements != null && measurements.UserId != Guid.Empty && measurements.UserId != null)
+                {
+                    var customerProfile = await MeasurementsHandler.UpdateMeasurements(measurements);
+
+                    return Ok(customerProfile);
+                }
+                return StatusCode(404);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.ToString());
+                return StatusCode(505, ex.Message);
+            }
+        }
+        #endregion
+
+
+        #region Get Customer Profile
+        [HttpGet("get-customer-profile")]
+        public async Task<IActionResult> GetCustomerProfile([FromQuery] Guid userId)
+        {
+            try
+            {
+                if (userId != null && userId != Guid.Empty)
                 {
                     //get Customer Listing Favorites Mapping
                     //get Customer Listing Recommendations
                     //get Customer MediaFileMapping
                     //get Customer Store Favorites Mapping
                     //get Measurements Profile
-                    //var customerProfile = await CustomerHandler.GetCustomerProfile(email);
-                    //if (customerProfile == null)
-                    //{
-                    //    return StatusCode(505, "An unexpected error has ocurred, unable to read Customer");
-                    //}
-                    //Logger.LogWarning("Customer Profile found");
-                    //return Ok(customerProfile);
+                    var customerProfile = await MeasurementsHandler.GetMeasurements(userId);
+   
+                    return Ok(customerProfile);
+                }
+                return StatusCode(404);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.ToString());
+                return StatusCode(505, ex.Message);
+            }
+        }
+        #endregion
+
+        #region Get Order History
+        [HttpGet("order-history")]
+        public async Task<IActionResult> OrderHistory([FromQuery] Guid userId)
+        {
+            try
+            {
+                if (userId != null && userId != Guid.Empty)
+                {
+                    var orderHistory = await OrderHandler.OrderHistory(userId);
+                    if (orderHistory == null)
+                    {
+                        return StatusCode(505, "An unexpected error has ocurred, unable to complete order");
+                    }
+
+                    return Ok(orderHistory);
                 }
                 return StatusCode(404);
             }

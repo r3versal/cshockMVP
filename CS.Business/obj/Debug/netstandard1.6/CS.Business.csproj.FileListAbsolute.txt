@@ -22,3 +22,15 @@
 /Users/Carmen/Downloads/CS.Platform-main/CS.Business/obj/Debug/netstandard1.6/CS.Business.csproj.CopyComplete
 /Users/Carmen/Downloads/CS.Platform-main/CS.Business/obj/Debug/netstandard1.6/CS.Business.dll
 /Users/Carmen/Downloads/CS.Platform-main/CS.Business/obj/Debug/netstandard1.6/CS.Business.pdb
+/Users/Carmen/repos/cshockMVP/CS.Business/bin/Debug/netstandard1.6/CS.Business.deps.json
+/Users/Carmen/repos/cshockMVP/CS.Business/bin/Debug/netstandard1.6/CS.Business.dll
+/Users/Carmen/repos/cshockMVP/CS.Business/bin/Debug/netstandard1.6/CS.Business.pdb
+/Users/Carmen/repos/cshockMVP/CS.Business/bin/Debug/netstandard1.6/CS.Common.dll
+/Users/Carmen/repos/cshockMVP/CS.Business/bin/Debug/netstandard1.6/CS.Common.pdb
+/Users/Carmen/repos/cshockMVP/CS.Business/obj/Debug/netstandard1.6/CS.Business.csprojAssemblyReference.cache
+/Users/Carmen/repos/cshockMVP/CS.Business/obj/Debug/netstandard1.6/CS.Business.AssemblyInfoInputs.cache
+/Users/Carmen/repos/cshockMVP/CS.Business/obj/Debug/netstandard1.6/CS.Business.AssemblyInfo.cs
+/Users/Carmen/repos/cshockMVP/CS.Business/obj/Debug/netstandard1.6/CS.Business.csproj.CoreCompileInputs.cache
+/Users/Carmen/repos/cshockMVP/CS.Business/obj/Debug/netstandard1.6/CS.Business.csproj.CopyComplete
+/Users/Carmen/repos/cshockMVP/CS.Business/obj/Debug/netstandard1.6/CS.Business.dll
+/Users/Carmen/repos/cshockMVP/CS.Business/obj/Debug/netstandard1.6/CS.Business.pdb

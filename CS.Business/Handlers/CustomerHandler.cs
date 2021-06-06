@@ -44,13 +44,19 @@ namespace CS.Business.Handlers
         }
 
 
-        public static async Task<List<OrderItem>> InsertCustomerOrder(CustomerOrderDataModel cdm, Guid customerId)
+        public static async Task<CustomerOrder> InsertCustomerOrder(CustomerOrderDataModel cdm, Guid customerId)
         {
             if (cdm != null)
             {
 
                 CustomerOrderDataModel codm = new CustomerOrderDataModel();
                 List<OrderItem> items = new List<OrderItem>();
+                CustomerOrder order = new CustomerOrder();
+                order.OrderId = Guid.NewGuid();
+                order.OrderNumber = "TestOrder-01";
+                order.CustomerId = customerId;
+                DateTime temp = DateTime.UtcNow;
+                order.CreatedOn = temp;
                 items = cdm.orderItems;
                 Customer c = new Customer();
                 List<OrderItem> returnedItems = new List<OrderItem>();
@@ -58,12 +64,13 @@ namespace CS.Business.Handlers
                 //insert customer
                 using (var conn = Business.Database.Connection)
                 {
-                    foreach(var item in items)
+                    foreach (var item in items)
                     {
                         item.CustomerId = customerId;
                         item.OrderItemId = Guid.NewGuid();
+                        item.OrderId = order.OrderId;
 
-                        var newOrder = await conn.QueryAsync<OrderItem>("NewOrderInsert", new
+                        var newOrderItem = await conn.QueryAsync<OrderItem>("OrderItemInsert", new
                         {
                             item.OrderItemId,
                             item.CustomerId,
@@ -71,15 +78,27 @@ namespace CS.Business.Handlers
                             item.description,
                             item.StripePriceID,
                             item.StripeID,
-                            item.Title
+                            item.Title,
+                            item.OrderId
                         },
                         commandType: CommandType.StoredProcedure);
                         returnedItems.Add(item);
                     }
+                    order.orderItems = items;
+
+                    var newOrder = await conn.QueryAsync<CustomerOrder>("OrderInsert", new
+                    {
+                        order.OrderId,
+                        order.OrderNumber,
+                        order.CustomerId,
+                        order.CreatedOn,
+                        cdm.userId
+                    },
+                        commandType: CommandType.StoredProcedure);
 
                     if (returnedItems.Count() > 0)
                     {
-                        return returnedItems;
+                        return order;
                     }
                     return null;
                 }
@@ -177,27 +196,22 @@ namespace CS.Business.Handlers
             return false;
         }
 
-        public static async Task<CustomerDataModel> GetCustomer(string email)
+        public static async Task<Customer> GetCustomer(string email)
         {
-            //TODO: replace ids with real data ids and attempt to return multiple tables into cdm object
             Customer c = new Customer();
-            c.CustomerId = Guid.NewGuid();
-            Measurements m = new Measurements();
-            m.MeasurementsId = Guid.NewGuid();
             using (var conn = Business.Database.Connection)
             {
-                var newCustomer = await conn.QueryAsync<CustomerDataModel>("Test", new
+                var customer = await conn.QueryAsync<Customer>("GetCustomer", new
                 {
-                    c.Email
+                    email
                 },
                     commandType: CommandType.StoredProcedure);
-                if (newCustomer.Count() > 0)
+                if (customer.Count() > 0)
                 {
-                    return newCustomer.AsList()[0];
+                    return customer.AsList()[0];
                 }
                 return null;
             }
-            return null;
         }
     }
 }

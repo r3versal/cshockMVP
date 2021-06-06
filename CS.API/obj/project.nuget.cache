@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/qKtt3JpUqMEvoDcgJFgxNkDaQH1P4DI4x6PKi+LdVCQtiDDDFB5WbsVfIVimi6m/8IiKHy1CLG7dsjq+53RZw==",
+  "dgSpecHash": "K6DXPYRO2RbqWinSMjvdo9REf8PjLxl8xwEbyAKsddHznJAd2qCh5EwMTvDQFQ7XVRzeIcFUXi3+NXW2iIvM1g==",
   "success": true,
-  "projectFilePath": "/Users/Carmen/Downloads/CS.Platform-main/CS.API/CS.API.csproj",
+  "projectFilePath": "/Users/Carmen/repos/cshockMVP/CS.API/CS.API.csproj",
   "expectedPackageFiles": [
     "/Users/Carmen/.nuget/packages/dapper/1.50.2/dapper.1.50.2.nupkg.sha512",
     "/Users/Carmen/.nuget/packages/microsoft.aspnetcore.antiforgery/2.1.0/microsoft.aspnetcore.antiforgery.2.1.0.nupkg.sha512",

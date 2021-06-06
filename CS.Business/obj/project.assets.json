@@ -6182,11 +6182,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/CS.Business.csproj",
+      "projectUniqueName": "/Users/Carmen/repos/cshockMVP/CS.Business/CS.Business.csproj",
       "projectName": "CS.Business",
-      "projectPath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/CS.Business.csproj",
+      "projectPath": "/Users/Carmen/repos/cshockMVP/CS.Business/CS.Business.csproj",
       "packagesPath": "/Users/Carmen/.nuget/packages/",
-      "outputPath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/obj/",
+      "outputPath": "/Users/Carmen/repos/cshockMVP/CS.Business/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/Carmen/.config/NuGet/NuGet.Config"
@@ -6200,8 +6200,8 @@
       "frameworks": {
         "netstandard1.6": {
           "projectReferences": {
-            "/Users/Carmen/Downloads/CS.Platform-main/CS.Common/CS.Common.csproj": {
-              "projectPath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Common/CS.Common.csproj"
+            "/Users/Carmen/repos/cshockMVP/CS.Common/CS.Common.csproj": {
+              "projectPath": "/Users/Carmen/repos/cshockMVP/CS.Common/CS.Common.csproj"
             }
           }
         }

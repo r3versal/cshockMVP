@@ -19,5 +19,6 @@ namespace CS.Common.Models
         public decimal knee { get; set; }
         public decimal leg { get; set; }
         public string email { get; set; }
+        public Guid UserId { get; set; }
     }
 }

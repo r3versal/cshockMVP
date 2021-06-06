@@ -1,7 +1,7 @@
 ﻿using System;
 namespace CS.Common.Models
 {
-    public class Address
+    public class CustomerAddress
     {
         public Guid customerAddressId { get; set; }
         public Guid userId { get; set; }
@@ -9,11 +9,9 @@ namespace CS.Common.Models
         public bool IsBilling { get; set; }
         public bool IsShipping { get; set; }
         public bool IsDefault { get; set; }
-        public string Salutation { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
-        public string CountryCode { get; set; }
         public string Zipcode { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime CreatedOn { get; set; }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SXUfn2mBzCJHa8eqtSLhHRzhRs/GbCB82Tu2mD/Hw1a3QuB7X8fYUVV6v9CJs6GrkDuD1jeYAfgdJOiOY4BU0A==",
+  "dgSpecHash": "Z3Zpzi05EI3kZX68V5A15nOUMu40DO+Fmuv9BpO4Fn7/3AIhXYGngzaz38N61M7DlqQkqNyh54F0dNLiCingCQ==",
   "success": true,
-  "projectFilePath": "/Users/Carmen/Downloads/CS.Platform-main/CS.Business/CS.Business.csproj",
+  "projectFilePath": "/Users/Carmen/repos/cshockMVP/CS.Business/CS.Business.csproj",
   "expectedPackageFiles": [
     "/Users/Carmen/.nuget/packages/dapper/1.50.2/dapper.1.50.2.nupkg.sha512",
     "/Users/Carmen/.nuget/packages/microsoft.aspnetcore.cryptography.internal/1.1.1/microsoft.aspnetcore.cryptography.internal.1.1.1.nupkg.sha512",

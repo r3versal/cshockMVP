@@ -14,7 +14,7 @@ namespace CS.Business.Handlers
     public class MeasurementsHandler
     {
 
-        public static async Task<Measurements> InsertMeasurments(CustomerOrderDataModel cdm, Guid measurementsId)
+        public static async Task<Measurements> InsertMeasurments(CustomerOrderDataModel cdm, Guid measurementsId, Guid userId)
         {
             if (cdm != null)
             {
@@ -35,6 +35,7 @@ namespace CS.Business.Handlers
                 m.thigh = cdm.measurements.thigh;
                 m.knee = cdm.measurements.knee;
                 m.leg = cdm.measurements.leg;
+                m.UserId = userId;
 
                 //insert measurements
                 using (var conn = Business.Database.Connection)
@@ -42,6 +43,7 @@ namespace CS.Business.Handlers
                     var newMeasurements = await conn.QueryAsync<Measurements>("MeasurementsInsert", new
                     {
                         m.MeasurementsId,
+                        m.UserId,
                         m.bust,
                         m.waist,
                         m.hips,
@@ -66,6 +68,53 @@ namespace CS.Business.Handlers
                 }
             }
             return null;
+        }
+
+        public static async Task<Measurements> GetMeasurements(Guid userId)
+        {
+            using (var conn = Business.Database.Connection)
+            {
+                var m = await conn.QueryAsync<Measurements>("GetMeasurementsByUserId", new
+                {
+                    userId
+                },
+                    commandType: CommandType.StoredProcedure);
+                if (m.Count() > 0)
+                {
+                    return m.AsList()[0];
+                }
+                return null;
+            }
+        }
+
+        public static async Task<Measurements> UpdateMeasurements(Measurements m)
+        {
+            using (var conn = Business.Database.Connection)
+            {
+                var mea = await conn.QueryAsync<Measurements>("UpdateMeasurements", new
+                {
+                    m.UserId,
+                    m.bust,
+                    m.waist,
+                    m.hips,
+                    m.neck,
+                    m.shoulder,
+                    m.backWidth,
+                    m.frontLength,
+                    m.crotch,
+                    m.inseam,
+                    m.outseam,
+                    m.thigh,
+                    m.knee,
+                    m.leg
+                },
+                    commandType: CommandType.StoredProcedure);
+                if (mea.Count() > 0)
+                {
+                    return mea.AsList()[0];
+                }
+                return null;
+            }
         }
     }
 }
