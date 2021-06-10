@@ -99,7 +99,7 @@ namespace CS.Business.Handlers
                     m.hips,
                     m.neck,
                     m.shoulder,
-                    m.backWidth,
+                    m.backLength,
                     m.frontLength,
                     m.crotch,
                     m.inseam,
