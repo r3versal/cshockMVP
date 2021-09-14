@@ -20,6 +20,7 @@ namespace CS.Business.Handlers
             {
                 Customer c = new Customer();
                 c.CustomerId = Guid.NewGuid();
+                c.UserId = cdm.userId;
                 c.Email = cdm.measurements.email;
                 c.MeasurementsId = Guid.NewGuid();
 
@@ -30,7 +31,15 @@ namespace CS.Business.Handlers
                     {
                         c.CustomerId,
                         c.Email,
-                        c.MeasurementsId
+                        c.MeasurementsId,
+                        c.FirstName,
+                        c.LastName,
+                        c.Birthdate,
+                        c.Gender,
+                        c.TimeZoneId,
+                        c.UserId,
+                        c.IsMember
+                        
                     },
                      commandType: CommandType.StoredProcedure);
                     if (newCustomer.Count() > 0)
@@ -44,22 +53,21 @@ namespace CS.Business.Handlers
         }
 
 
-        public static async Task<CustomerOrder> InsertCustomerOrder(CustomerOrderDataModel cdm, Guid customerId)
+        public static async Task<Order> InsertCustomerOrder(CustomerOrderDataModel cdm, Guid customerId)
         {
             if (cdm != null)
             {
 
                 CustomerOrderDataModel codm = new CustomerOrderDataModel();
                 List<OrderItem> items = new List<OrderItem>();
-                CustomerOrder order = new CustomerOrder();
+                Order order = new Order();
                 order.OrderId = Guid.NewGuid();
-                order.OrderNumber = "TestOrder-01";
+                order.OrderNumber = "TestOrder-" + order.OrderId;
                 order.CustomerId = customerId;
                 DateTime temp = DateTime.UtcNow;
                 order.CreatedOn = temp;
+                order.UpdatedOn = temp;
                 items = cdm.orderItems;
-                Customer c = new Customer();
-                List<OrderItem> returnedItems = new List<OrderItem>();
                 
                 //insert customer
                 using (var conn = Business.Database.Connection)
@@ -69,22 +77,28 @@ namespace CS.Business.Handlers
                         item.CustomerId = customerId;
                         item.OrderItemId = Guid.NewGuid();
                         item.OrderId = order.OrderId;
+                        //TODO: assign productID
+                        
 
                         var newOrderItem = await conn.QueryAsync<OrderItem>("OrderItemInsert", new
                         {
                             item.OrderItemId,
                             item.CustomerId,
-                            item.count,
-                            item.description,
                             item.StripePriceID,
-                            item.StripeID,
-                            item.Title,
-                            item.OrderId
-                        },
-                        commandType: CommandType.StoredProcedure);
-                        returnedItems.Add(item);
+                            item.OrderId,
+                            item.ProductId,
+                            item.PrepaidAlterations,
+                            item.PurchasedInsurance,
+                            item.QuantityOrdered,
+                            item.UnitPrice,
+                            item.UnitPriceInclTax,
+                            item.TaxRate,
+                            item.ProductTitle,
+                            item.ProductDescription
+                        });
                     }
-                    order.orderItems = items;
+                    order.OrderItems = items;
+                    order.OrderStatus = "OrderReceived";
 
                     var newOrder = await conn.QueryAsync<CustomerOrder>("OrderInsert", new
                     {
@@ -92,11 +106,14 @@ namespace CS.Business.Handlers
                         order.OrderNumber,
                         order.CustomerId,
                         order.CreatedOn,
-                        cdm.userId
+                        order.UpdatedOn,
+                        order.TransactionId,
+                        order.BillingAddressId,
+                        order.ShippingAddressId,
                     },
                         commandType: CommandType.StoredProcedure);
 
-                    if (returnedItems.Count() > 0)
+                    if (newOrder.Count() > 0)
                     {
                         return order;
                     }
@@ -106,35 +123,57 @@ namespace CS.Business.Handlers
             return null;
         }
 
-        //public static async Task<Customer> InsertCustomer(CustomerDataModel cdm)
+        //public static async Task<CustomerOrder> InsertCustomerOrder(CustomerOrderDataModel cdm, Guid customerId)
         //{
-        //    if(cdm.Customer != null)
+        //    if (cdm != null)
         //    {
 
-        //    Customer c = cdm.Customer;
-        //    c.CustomerId = Guid.NewGuid();
-        //    c.Active = true;
+        //        CustomerOrderDataModel codm = new CustomerOrderDataModel();
+        //        List<OrderItem> items = new List<OrderItem>();
+        //        CustomerOrder order = new CustomerOrder();
+        //        order.OrderId = Guid.NewGuid();
+        //        order.OrderNumber = "TestOrder-" + order.OrderId;
+        //        order.CustomerId = customerId;
+        //        DateTime temp = DateTime.UtcNow;
+        //        order.CreatedOn = temp;
+        //        order.UpdatedOn = temp;
+        //        items = cdm.orderItems;
+        //        List<OrderItem> returnedItems = new List<OrderItem>();
 
+        //        //insert customer
         //        using (var conn = Business.Database.Connection)
         //        {
-        //            var newCustomer = await conn.QueryAsync<Customer>("CustomerInsert", new
+        //            foreach (var item in items)
         //            {
-        //                c.CustomerId,
-        //                c.Email,
-        //                c.Active,
-        //                c.Username,
-        //                c.FirstName,
-        //                c.LastName,
-        //                c.Birthdate,
-        //                c.Gender,
-        //                c.TimeZoneId,
-        //                c.InstagramHandle,
-        //                c.StripeUserID
+        //                item.CustomerId = customerId;
+        //                item.OrderItemId = Guid.NewGuid();
+        //                item.OrderId = order.OrderId;
+
+        //                var newOrderItem = await conn.QueryAsync<OrderItem>("OrderItemInsert", new
+        //                {
+        //                    item.OrderItemId,
+        //                    item.CustomerId,
+        //                    item.StripePriceID,
+        //                    item.OrderId
+        //                },
+        //                commandType: CommandType.StoredProcedure);
+        //                returnedItems.Add(item);
+        //            }
+        //            order.orderItems = items;
+
+        //            var newOrder = await conn.QueryAsync<CustomerOrder>("OrderInsert", new
+        //            {
+        //                order.OrderId,
+        //                order.OrderNumber,
+        //                order.CustomerId,
+        //                order.CreatedOn,
+        //                cdm.userId
         //            },
-        //             commandType: CommandType.StoredProcedure);
-        //            if (newCustomer.Count() > 0)
+        //                commandType: CommandType.StoredProcedure);
+
+        //            if (returnedItems.Count() > 0)
         //            {
-        //                return newCustomer.AsList()[0];
+        //                return order;
         //            }
         //            return null;
         //        }

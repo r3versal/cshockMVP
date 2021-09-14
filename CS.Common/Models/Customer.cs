@@ -16,5 +16,8 @@ namespace CS.Common.Models
         public string TimeZoneId { get; set; }
         public string InstagramHandle { get; set; }
         public Guid StripeUserID { get; set; }
+        public bool IsMember { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

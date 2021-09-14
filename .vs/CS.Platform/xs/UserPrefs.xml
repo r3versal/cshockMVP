@@ -1,15 +1,12 @@
 ﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Common/Models/Measurements.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Business/Handlers/CustomerHandler.cs">
     <Files>
-      <File FileName="CS.API/Controllers/CustomerController.cs" Line="204" Column="76" />
-      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="1" Column="1" />
-      <File FileName="CS.Business/Handlers/OrderHandler.cs" />
-      <File FileName="CS.Business/Handlers/MeasurementsHandler.cs" />
-      <File FileName="CS.API/Controllers/UserController.cs" />
-      <File FileName="CS.Common/Models/CustomerOrderDataModel.cs" />
-      <File FileName="CS.Business/Handlers/AddressHandler.cs" Line="49" Column="35" />
-      <File FileName="CS.Common/Models/Measurements.cs" Line="14" Column="24" />
+      <File FileName="CS.API/Controllers/CustomerController.cs" Line="210" Column="77" />
+      <File FileName="CS.Common/Models/CustomerOrderDataModel.cs" Line="1" Column="1" />
+      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="43" Column="36" />
+      <File FileName="CS.Common/Models/Order.cs" Line="29" Column="1" />
+      <File FileName="CS.Common/Models/Transaction.cs" Line="10" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,12 +18,12 @@
                 <Node name="appsettings.json" expanded="True" />
               </Node>
               <Node name="CS.Business" expanded="True">
-                <Node name="Handlers" expanded="True" />
+                <Node name="Handlers" expanded="True">
+                  <Node name="CustomerHandler.cs" selected="True" />
+                </Node>
               </Node>
               <Node name="CS.Common" expanded="True">
-                <Node name="Models" expanded="True">
-                  <Node name="Measurements.cs" selected="True" />
-                </Node>
+                <Node name="Models" expanded="True" />
               </Node>
             </Node>
           </Node>
