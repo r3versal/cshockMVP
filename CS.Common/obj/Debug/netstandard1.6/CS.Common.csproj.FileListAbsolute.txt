@@ -24,3 +24,4 @@
 /Users/Carmen/repos/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.csproj.CoreCompileInputs.cache
 /Users/Carmen/repos/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.dll
 /Users/Carmen/repos/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.pdb
+/Users/Carmen/repos/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.csprojAssemblyReference.cache

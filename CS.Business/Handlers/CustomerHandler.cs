@@ -38,7 +38,9 @@ namespace CS.Business.Handlers
                         c.Gender,
                         c.TimeZoneId,
                         c.UserId,
-                        c.IsMember
+                        c.IsMember,
+                        c.CreatedOn,
+                        c.UpdatedOn
                         
                     },
                      commandType: CommandType.StoredProcedure);
@@ -94,7 +96,9 @@ namespace CS.Business.Handlers
                             item.UnitPriceInclTax,
                             item.TaxRate,
                             item.ProductTitle,
-                            item.ProductDescription
+                            item.ProductDescription,
+                            item.CreatedOn,
+                            item.UpdatedOn
                         });
                     }
                     order.OrderItems = items;
