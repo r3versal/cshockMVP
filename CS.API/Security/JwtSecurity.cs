@@ -80,6 +80,48 @@ namespace CS.API.Security
 
             return response;
         }
+
+        public static JwtToken GenerateRefreshToken(Guid userId, string username)
+        {
+            var options = new TokenProviderOptions
+            {
+                Audience = "User",
+                Issuer = "EVRAPI",
+                SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
+            };
+
+            var now = DateTime.UtcNow;
+            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
+            TimeSpan span = (now.ToLocalTime() - epoch);
+
+            // Specifically add the jti (random nonce), iat (issued timestamp), and sub (subject/user) claims.
+            // You can add other claims here, if you want:
+            var claims = new Claim[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, username + ":" + userId),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, span.TotalSeconds.ToString(), ClaimValueTypes.Integer64)
+            };
+
+            // Create the JWT and write it to a string
+            var jwt = new JwtSecurityToken(
+                issuer: options.Issuer,
+                audience: options.Audience,
+                claims: claims,
+                notBefore: now,
+                expires: now.Add(options.RefreshExpiration),
+                signingCredentials: options.SigningCredentials);
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            var response = new JwtToken
+            {
+                AccessToken = encodedJwt,
+                ExpiresIn = (int)options.RefreshExpiration.TotalSeconds
+            };
+
+            return response;
+        }
+
         public static User GetCurrentUser(HttpContext context)
         {
             var userIds = context.User.FindFirst(ClaimTypes.NameIdentifier).Value.Split(':');

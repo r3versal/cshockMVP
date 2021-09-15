@@ -82,6 +82,10 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "Microsoft.CSharp": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[2.1.0, )"
@@ -114,9 +118,13 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "Microsoft.IdentityModel.Logging": {
+              "target": "Package",
+              "version": "[6.12.2, )"
+            },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
-              "version": "[5.2.1, )"
+              "version": "[5.2.4, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
@@ -130,7 +138,11 @@
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[5.2.1, )"
+              "version": "[5.2.4, )"
+            },
+            "System.Security.Cryptography.Cng": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "WindowsAzure.StorageExtensions": {
               "target": "Package",
@@ -214,6 +226,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.3.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[5.2.4, )"
             }
           },
           "imports": [

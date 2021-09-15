@@ -1,12 +1,10 @@
 ﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Business/Handlers/CustomerHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.API/Controllers/UserController.cs">
     <Files>
-      <File FileName="CS.API/Controllers/CustomerController.cs" Line="210" Column="77" />
-      <File FileName="CS.Common/Models/CustomerOrderDataModel.cs" Line="1" Column="1" />
-      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="43" Column="36" />
-      <File FileName="CS.Common/Models/Order.cs" Line="29" Column="1" />
-      <File FileName="CS.Common/Models/Transaction.cs" Line="10" Column="1" />
+      <File FileName="CS.Common/Models/Product.cs" Line="11" Column="51" IsPinned="True" />
+      <File FileName="CS.Business/Handlers/ProductHandler.cs" IsPinned="True" />
+      <File FileName="CS.API/Controllers/UserController.cs" Line="137" Column="101" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,13 +12,13 @@
           <Node name="CS.Platform" expanded="True">
             <Node name="API" expanded="True">
               <Node name="CS.API" expanded="True">
-                <Node name="Controllers" expanded="True" />
-                <Node name="appsettings.json" expanded="True" />
+                <Node name="Controllers" expanded="True">
+                  <Node name="UserController.cs" selected="True" />
+                </Node>
+                <Node name="Security" expanded="True" />
               </Node>
               <Node name="CS.Business" expanded="True">
-                <Node name="Handlers" expanded="True">
-                  <Node name="CustomerHandler.cs" selected="True" />
-                </Node>
+                <Node name="Handlers" expanded="True" />
               </Node>
               <Node name="CS.Common" expanded="True">
                 <Node name="Models" expanded="True" />
