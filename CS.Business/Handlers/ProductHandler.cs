@@ -85,13 +85,26 @@ namespace CS.Business.Handlers
             return null;
         }
 
-        public static async Task<List<ProductPhoto>> GetProductPhotosById(Guid productVariantId)
+        public static async Task<List<ProductPhoto>> GetProductPhotosByProductVariantId(Guid productVariantId)
         {
             if (productVariantId != null)
             {
                 using (var conn = Business.Database.Connection)
                 {
                     var product = await conn.QueryAsync<ProductPhoto>("SELECT * FROM ProductPhoto WHERE productVariantId = '" + productVariantId + "'");
+                    return product.AsList();
+                }
+            }
+            return null;
+        }
+
+        public static async Task<List<ProductPhoto>> GetProductPhotosByProductId(Guid productId)
+        {
+            if (productId != null)
+            {
+                using (var conn = Business.Database.Connection)
+                {
+                    var product = await conn.QueryAsync<ProductPhoto>("SELECT * FROM ProductPhoto WHERE productId = '" + productId + "'");
                     return product.AsList();
                 }
             }

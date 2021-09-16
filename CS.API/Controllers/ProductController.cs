@@ -113,10 +113,19 @@ namespace CS.API.Controllers
         {
             try
             {
+                List<Product> products = new List<Product>();
                 var response = await ProductHandler.GetAllProducts();
                 if (response != null)
                 {
-                    return Ok(response);
+                    //get product photos
+                    for (int i = 0; i < response.Count; i++)
+                    {
+                        Product prod = response[i];
+                        var prodPhotos = await ProductHandler.GetProductPhotosByProductId(prod.ProductId);
+                        prod.ProductPhotos = prodPhotos;
+                        products.Add(prod);
+                    }
+                    return Ok(products);
                 }
                 return null;
             }
@@ -140,6 +149,9 @@ namespace CS.API.Controllers
                     var response = await ProductHandler.GetProductById(productId);
                     if (response != null)
                     {
+                        //get product photos
+                        var response2 = await ProductHandler.GetProductPhotosByProductId(response.ProductVariantId);
+                        response.ProductPhotos = response2;
                         return Ok(response);
                     }
                 }
@@ -168,7 +180,7 @@ namespace CS.API.Controllers
                     if (response != null)
                     {
                         //get product photos
-                        var response2 = await ProductHandler.GetProductPhotosById(response.ProductVariantId);
+                        var response2 = await ProductHandler.GetProductPhotosByProductVariantId(response.ProductVariantId);
                         response.ProductPhotos = response2;
                         return Ok(response);
                     }
