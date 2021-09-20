@@ -20,6 +20,7 @@ namespace CS.Common.Models
         public string ProductDescription { get; set; }
         public string productTitle { get; set; }
         public string ProductCareInstructions { get; set; }
+        public string productDescriptionShort { get; set; }
         public string SKU { get; set; }
     }
 }
