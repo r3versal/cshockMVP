@@ -50,7 +50,7 @@ namespace EVR.API.Controllers
 		}
 		#endregion
 
-		#region Upload Blob Candidate
+		#region Upload Blob Product photo
 		[HttpPost("upload-media-productphoto")]
 		public async Task<IActionResult> UploadBlobProductImage([FromForm] FileUpload objFile)
 		{
@@ -62,12 +62,11 @@ namespace EVR.API.Controllers
 
 					ProductPhoto item = Newtonsoft.Json.JsonConvert.DeserializeObject<ProductPhoto>(data);
 
-					Guid userId = item.productVariantId;
 					item.productPhotoId = Guid.NewGuid();
 					var files = objFile.files;
 					string fileName = files[0].FileName;
 
-					string uri = await _azureBlobService.UploadAsyncProductPhoto(files, userId.ToString());
+					string uri = await _azureBlobService.UploadAsyncProductPhoto(files, item.productVariantId.ToString());
 					item.PhotoURL = uri;
 					//Create candidatemediafilemapping row call candidate handler pass uri
 					await ProductHandler.CreateProductPhotoMediaFile(item);

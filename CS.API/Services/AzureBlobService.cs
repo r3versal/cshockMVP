@@ -10,10 +10,8 @@ namespace CS.API.Services
 	public interface IAzureBlobService
 	{
 		Task<IEnumerable<Uri>> ListAsync();
-		Task DeleteAsync(string fileUri, string userId, string isResume);
-		Task DeleteAllAsync();
 		Task<string> UploadAsyncProductPhoto(IFormFileCollection files, string productVariantId);
-		Task<IEnumerable<Uri>> GetCandidateMediaAsync(string userId, bool isResume);
+		Task<IEnumerable<Uri>> GetProductMediaAsync(string productVariantId);
 
 	}
 
@@ -26,45 +24,7 @@ namespace CS.API.Services
 			_azureBlobConnectionFactory = azureBlobConnectionFactory;
 		}
 
-		public async Task DeleteAllAsync()
-		{
-			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
-
-			BlobContinuationToken blobContinuationToken = null;
-			do
-			{
-				var response = await blobContainer.ListBlobsSegmentedAsync(blobContinuationToken);
-				foreach (IListBlobItem blob in response.Results)
-				{
-					if (blob.GetType() == typeof(CloudBlockBlob))
-						await ((CloudBlockBlob)blob).DeleteIfExistsAsync();
-				}
-				blobContinuationToken = response.ContinuationToken;
-			} while (blobContinuationToken != null);
-		}
-
-		public async Task DeleteAsync(string fileUri, string userId, string isResume)
-		{
-			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
-
-			Uri uri = new UriBuilder(fileUri).Uri;
-
-			string filename = Path.GetFileName(uri.AbsolutePath);
-			string fileNameFinal;
-			if (isResume == "0")
-			{
-				fileNameFinal = "candidates/" + userId + "/image/" + filename;
-			}
-			else
-			{
-				fileNameFinal = "candidates/" + userId + "/resume/" + filename;
-			}
-
-			var blob = blobContainer.GetBlockBlobReference(fileNameFinal);
-			var deleted = await blob.DeleteIfExistsAsync();
-		}
-
-		public async Task<IEnumerable<Uri>> ListAsync()
+        public async Task<IEnumerable<Uri>> ListAsync()
 		{
 			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
 			var allBlobs = new List<Uri>();
@@ -83,7 +43,7 @@ namespace CS.API.Services
 		}
 
 
-		public async Task<IEnumerable<Uri>> GetCandidateMediaAsync(string userId, bool isResume)
+		public async Task<IEnumerable<Uri>> GetProductMediaAsync(string productVariantId)
 		{
 			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
 			var allBlobs = new List<Uri>();
@@ -131,14 +91,14 @@ namespace CS.API.Services
 			return string.Format("productphotos/" + productVariantId, DateTime.Now.Ticks, Guid.NewGuid(), ext);
 		}
 
-		public async Task<string> UploadAsyncCompany(IFormFileCollection files, string userId)
+		public async Task<string> UploadAsyncCompany(IFormFileCollection files, string productVariantId)
 		{
 			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
 			var toReturn = "";
 
 			for (int i = 0; i < files.Count; i++)
 			{
-				var blob = blobContainer.GetBlockBlobReference(GetRandomBlobNameCompany(files[i].FileName, userId));
+				var blob = blobContainer.GetBlockBlobReference(GetRandomBlobNameCompany(files[i].FileName, productVariantId));
 				blob.Properties.ContentType = "image/jpeg";
 				using (var stream = files[i].OpenReadStream())
 				{
@@ -147,12 +107,6 @@ namespace CS.API.Services
 				toReturn = blob.StorageUri.PrimaryUri.ToString();
 			}
 			return toReturn;
-		}
-
-		private string GetRandomBlobNameCompany(string filename, string userId)
-		{
-			string ext = Path.GetExtension(filename);
-			return string.Format("company/" + userId + "/" + "{0:10}_{1}{2}", DateTime.Now.Ticks, Guid.NewGuid(), ext);
 		}
 	}
 }

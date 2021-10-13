@@ -1,15 +1,10 @@
 ﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.API/Controllers/CustomerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.API/Services/AzureBlobService.cs">
     <Files>
-      <File FileName="CS.API/Controllers/UserController.cs" Line="329" Column="19" />
-      <File FileName="CS.API/Controllers/ProductController.cs" Line="68" Column="18" />
-      <File FileName="CS.Common/Models/Product.cs" Line="19" Column="44" />
-      <File FileName="CS.Business/Handlers/ProductHandler.cs" Line="28" Column="60" />
-      <File FileName="CS.API/Controllers/ProfileController.cs" Line="76" Column="65" />
-      <File FileName="CS.Business/Handlers/ProfileHandler.cs" Line="59" Column="64" />
-      <File FileName="CS.API/Controllers/CustomerController.cs" Line="210" Column="81" />
-      <File FileName="CS.Business/Handlers/MeasurementsHandler.cs" Line="90" Column="48" />
+      <File FileName="CS.API/Controllers/BlobController.cs" Line="69" Column="57" />
+      <File FileName="CS.Common/Models/ProductPhoto.cs" Line="4" Column="18" />
+      <File FileName="CS.API/Services/AzureBlobService.cs" Line="13" Column="44" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,12 +12,12 @@
           <Node name="CS.Platform" expanded="True">
             <Node name="API" expanded="True">
               <Node name="CS.API" expanded="True">
-                <Node name="Controllers" expanded="True">
-                  <Node name="CustomerController.cs" selected="True" />
-                </Node>
+                <Node name="Controllers" expanded="True" />
                 <Node name="Models" expanded="True" />
                 <Node name="Security" expanded="True" />
-                <Node name="Services" expanded="True" />
+                <Node name="Services" expanded="True">
+                  <Node name="AzureBlobService.cs" selected="True" />
+                </Node>
               </Node>
               <Node name="CS.Business" expanded="True">
                 <Node name="Handlers" expanded="True" />
