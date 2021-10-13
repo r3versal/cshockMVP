@@ -46,6 +46,19 @@ namespace CS.Business.Handlers
             }
         }
 
+        public static async Task<List<User>> UpdateUser(User user)
+        {
+            using (var conn = Business.Database.Connection)
+            {
+                var foundUsers = await conn.QueryAsync<User>("UserUpdate", user, commandType: CommandType.StoredProcedure);
+                if (foundUsers.AsList().Count() > 0)
+                {
+                    return foundUsers.AsList();
+                }
+                return null;
+            }
+        }
+
         public static async Task<User> GetUserById(Guid userId)
         {
             using (var conn = Business.Database.Connection)

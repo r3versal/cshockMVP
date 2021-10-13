@@ -18,20 +18,27 @@ namespace CS.Business.Handlers
         {
             if (product != null)
             {
-                Product p = new Product();
-
                 //insert product
-                //TODO: handle add photo(s)
                 using (var conn = Business.Database.Connection)
                 {
-                    var newProduct = await conn.QueryAsync<Product>("ProductInsert", new
+                    product.createdOn = DateTime.UtcNow;
+                    product.updatedOn = DateTime.UtcNow;
+                    if (product.ProductId == null || product.ProductId == Guid.Empty)
                     {
-                        product
-                    },
-                     commandType: CommandType.StoredProcedure);
+                        product.ProductId = Guid.NewGuid();
+                    }
+                    product.ProductVariantId = Guid.NewGuid();
+                    var newProduct = await conn.QueryAsync<Product>("ProductInsert", new{ product }, commandType: CommandType.StoredProcedure);
+                    var returnedProduct = newProduct.AsList()[0];
                     if (newProduct.Count() > 0)
                     {
-                        return newProduct.AsList()[0];
+                        if(product.productMeasurements != null)
+                        {
+                            var newMeasurements = await conn.QueryAsync<ProductMeasurements>("ProductMeasurementsInsert", new { product.productMeasurements }, commandType: CommandType.StoredProcedure);
+                            returnedProduct.productMeasurements = newMeasurements.AsList()[0];
+                        }
+
+                        return returnedProduct;
                     }
                     return null;
                 }
@@ -43,20 +50,20 @@ namespace CS.Business.Handlers
         {
             if (product != null)
             {
-                Product p = new Product();
-
-                //insert product
-                //TODO: handle add photo(s)
+                product.updatedOn = DateTime.UtcNow;
                 using (var conn = Business.Database.Connection)
                 {
-                    var newProduct = await conn.QueryAsync<Product>("ProductUpdate", new
-                    {
-                        product
-                    },
-                     commandType: CommandType.StoredProcedure);
+                    var newProduct = await conn.QueryAsync<Product>("ProductUpdate", new { product }, commandType: CommandType.StoredProcedure);
+                    var returnedProduct = newProduct.AsList()[0];
                     if (newProduct.Count() > 0)
                     {
-                        return newProduct.AsList()[0];
+                        if (product.productMeasurements != null)
+                        {
+                            var newMeasurements = await conn.QueryAsync<ProductMeasurements>("ProductMeasurementsUpdate", new { product.productMeasurements }, commandType: CommandType.StoredProcedure);
+                            returnedProduct.productMeasurements = newMeasurements.AsList()[0];
+                        }
+
+                        return returnedProduct;
                     }
                     return null;
                 }
@@ -64,15 +71,17 @@ namespace CS.Business.Handlers
             return null;
         }
 
-        public static async Task<Product> DeleteProduct(Guid productId)
+        public static async Task<Product> DeleteProduct(Product product)
         {
-            if (productId != null)
+            if (product != null)
             {
+                product.updatedOn = DateTime.UtcNow;
+                product.Active = false;
                 using (var conn = Business.Database.Connection)
                 {
-                    var newProduct = await conn.QueryAsync<Product>("ProductDelete", new
+                    var newProduct = await conn.QueryAsync<Product>("ProductUpdate", new
                     {
-                        productId
+                        product
                     },
                      commandType: CommandType.StoredProcedure);
                     if (newProduct.Count() > 0)
@@ -154,6 +163,24 @@ namespace CS.Business.Handlers
                 var products = await conn.QueryAsync<Product>("SELECT * FROM Product WHERE active = 1");
                 return products.AsList();
             }
+        }
+
+        public static async Task<ProductPhoto> CreateProductPhotoMediaFile(ProductPhoto productPhoto)
+        {
+            using (var conn = Business.Database.Connection)
+            {
+                var newProductPhoto = await conn.QueryAsync<ProductPhoto>("ProductPhotoInsert", new
+                {
+                    productPhoto
+                },
+                     commandType: CommandType.StoredProcedure);
+                if (newProductPhoto.Count() > 0)
+                {
+                    return newProductPhoto.AsList()[0];
+                }
+                return null;
+            }
+
         }
     }
 }

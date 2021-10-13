@@ -8,5 +8,8 @@ namespace CS.Common.Models
         public string PhotoURL { get; set; }
         public bool Featured { get; set; }
         public Guid productVariantId { get; set; }
+        public string photoTitle { get; set; }
+        public bool isSwatch { get; set; }
+        public bool isActive { get; set; }
     }
 }

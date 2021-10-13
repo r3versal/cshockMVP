@@ -84,17 +84,45 @@ namespace CS.API.Controllers
                     }
                     Logger.LogInformation("User authenticated");
                     var jwt = JwtSecurity.GenerateToken(user.UserId, user.Email);
+                    var jwtRefresh = JwtSecurity.GenerateRefreshToken(user.UserId, user.Email);
 
                     var loginResponse = new
                     {
                         User = user,
-                        CSToken = jwt
+                        CSToken = jwt,
+                        RefreshToken = jwtRefresh
                     };
                     var response = JsonConvert.SerializeObject(loginResponse, new JsonSerializerSettings { Formatting = Formatting.None });
 
                     return Ok(loginResponse);
                 }
                 return StatusCode(408, new ErrorResponse() { Message = "Bad Login Request" });
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.ToString());
+                return StatusCode(505, ex.Message);
+            }
+        }
+        #endregion
+
+        #region Update User
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] User user)
+        {
+            try
+            {
+                if (user != null)
+                {
+                    var userUpdated = await UserHandler.UpdateUser(user);
+                    if (userUpdated == null)
+                    {
+                        Logger.LogInformation("User update failed: " + user);
+                        return StatusCode(505, "User update failed.");
+                    }
+                    return Ok(userUpdated);
+                }
+                return StatusCode(408, new ErrorResponse() { Message = "User Data not recieved." });
             }
             catch (Exception ex)
             {
@@ -143,7 +171,7 @@ namespace CS.API.Controllers
                         var loginResponse = new
                         {
                             User = authUser,
-                            EVRToken = jwt,
+                            CSToken = jwt,
                             RefreshToken = jwtRefresh
                         };
                         var response = JsonConvert.SerializeObject(loginResponse, new JsonSerializerSettings { Formatting = Formatting.None });
@@ -161,7 +189,6 @@ namespace CS.API.Controllers
             }
         }
         #endregion
-
 
         #region Forgot Password Send Link
         [HttpPost("reset-password-request")]
@@ -200,7 +227,7 @@ namespace CS.API.Controllers
                         return Ok(false);
                     }
                 }
-                return StatusCode(505, "EVR API Error: Email Json data not received, unable to send password reset link");
+                return StatusCode(505, "CS API Error: Email Json data not received, unable to send password reset link");
             }
             catch (Exception ex)
             {
@@ -264,7 +291,7 @@ namespace CS.API.Controllers
                     }
 
                 }
-                return StatusCode(505, "EVR API Error: User or password Json data not received, unable to update password");
+                return StatusCode(505, "CS API Error: User or password Json data not received, unable to update password");
             }
             catch (Exception ex)
             {
@@ -301,37 +328,13 @@ namespace CS.API.Controllers
         }
         #endregion
 
-        #region Private Delete User By Email
-        //[HttpPost("private-delete")]
-        //public async Task<IActionResult> DeleteByEmail([FromBody] string email)
-        //{
-        //    try
-        //    {
-        //        if (email != null)
-        //        {
-        //            var deleted = UserHandler.DeleteUser(email);
-        //            return Ok(deleted);
-        //        }
-        //        else
-        //        {
-        //            return StatusCode(408, new ErrorResponse() { Message = "Bad Request, no email recieved" });
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string errorMessage = handleCatch(ex);
-        //        return StatusCode(505, errorMessage);
-        //    }
-        //}
-        #endregion
-
         #region Handle Catch (Logs error in logger, sends email to Admin and returns error 505)
         private string handleCatch(Exception ex)
         {
             var st = new StackTrace(ex, true);
             var frame = st.GetFrame(0);
             var line = frame.GetFileLineNumber();
-            string m = "EVR API Exception: " + ex.Message + "Error Line: " + line;
+            string m = "CS API Exception: " + ex.Message + "Error Line: " + line;
             Logger.LogError(m);
 
             return m;

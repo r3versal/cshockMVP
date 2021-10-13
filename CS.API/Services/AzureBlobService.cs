@@ -10,9 +10,11 @@ namespace CS.API.Services
 	public interface IAzureBlobService
 	{
 		Task<IEnumerable<Uri>> ListAsync();
-		Task UploadAsync(IFormFileCollection files);
-		Task DeleteAsync(string fileUri);
+		Task DeleteAsync(string fileUri, string userId, string isResume);
 		Task DeleteAllAsync();
+		Task<string> UploadAsyncProductPhoto(IFormFileCollection files, string productVariantId);
+		Task<IEnumerable<Uri>> GetCandidateMediaAsync(string userId, bool isResume);
+
 	}
 
 	public class AzureBlobService : IAzureBlobService
@@ -41,18 +43,26 @@ namespace CS.API.Services
 			} while (blobContinuationToken != null);
 		}
 
-		public async Task DeleteAsync(string fileUri)
+		public async Task DeleteAsync(string fileUri, string userId, string isResume)
 		{
 			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
 
-			Uri uri = new Uri(fileUri);
-			string filename = Path.GetFileName(uri.LocalPath);
+			Uri uri = new UriBuilder(fileUri).Uri;
 
-			var blob = blobContainer.GetBlockBlobReference(filename);
-			await blob.DeleteIfExistsAsync();
+			string filename = Path.GetFileName(uri.AbsolutePath);
+			string fileNameFinal;
+			if (isResume == "0")
+			{
+				fileNameFinal = "candidates/" + userId + "/image/" + filename;
+			}
+			else
+			{
+				fileNameFinal = "candidates/" + userId + "/resume/" + filename;
+			}
+
+			var blob = blobContainer.GetBlockBlobReference(fileNameFinal);
+			var deleted = await blob.DeleteIfExistsAsync();
 		}
-
-
 
 		public async Task<IEnumerable<Uri>> ListAsync()
 		{
@@ -62,10 +72,10 @@ namespace CS.API.Services
 			do
 			{
 				var response = await blobContainer.ListBlobsSegmentedAsync(blobContinuationToken);
-				foreach (IListBlobItem blob in response.Results)
+				foreach (var blob in response.Results)
 				{
-					if (blob.GetType() == typeof(CloudBlockBlob))
-						allBlobs.Add(blob.Uri);
+					allBlobs.Add(blob.Uri);
+
 				}
 				blobContinuationToken = response.ContinuationToken;
 			} while (blobContinuationToken != null);
@@ -73,32 +83,76 @@ namespace CS.API.Services
 		}
 
 
-		public async Task UploadAsync(IFormFileCollection files)
+		public async Task<IEnumerable<Uri>> GetCandidateMediaAsync(string userId, bool isResume)
 		{
 			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
+			var allBlobs = new List<Uri>();
+			BlobContinuationToken blobContinuationToken = null;
+			do
+			{
+				var response = await blobContainer.ListBlobsSegmentedAsync(blobContinuationToken);
+				foreach (IListBlobItem blob in response.Results)
+				{
+					Console.WriteLine(blob.Container.Name);
+					Console.WriteLine(blob.StorageUri);
+					Console.WriteLine(blob.Uri);
+					Console.WriteLine(blob.ToString());
+				}
+				blobContinuationToken = response.ContinuationToken;
+			} while (blobContinuationToken != null);
+			return allBlobs;
+		}
+
+		public async Task<string> UploadAsyncProductPhoto(IFormFileCollection files, string productVariantId)
+		{
+			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
+			var toReturn = "";
 
 			for (int i = 0; i < files.Count; i++)
 			{
-				var blob = blobContainer.GetBlockBlobReference(GetRandomBlobNameCustomer(files[i].FileName));
-				//TODO create separate methods or update code to support pdf/resumes and update blob properties below to relevant content type
-				//These updates will be built out when the associated API calls are built
+				var blob = blobContainer.GetBlockBlobReference(GetRandomBlobNameProductPhoto(files[i].FileName, productVariantId));
+
+				blob.Properties.ContentType = "image/jpeg";
+				
+				using (var stream = files[i].OpenReadStream())
+				{
+					await blob.UploadFromStreamAsync(stream);
+				}
+				toReturn = blob.StorageUri.PrimaryUri.ToString();
+			}
+			return toReturn;
+		}
+
+		private string GetRandomBlobNameProductPhoto(string filename, string productVariantId)
+		{
+			string ext;
+
+			ext = Path.GetExtension(filename);
+			return string.Format("productphotos/" + productVariantId, DateTime.Now.Ticks, Guid.NewGuid(), ext);
+		}
+
+		public async Task<string> UploadAsyncCompany(IFormFileCollection files, string userId)
+		{
+			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
+			var toReturn = "";
+
+			for (int i = 0; i < files.Count; i++)
+			{
+				var blob = blobContainer.GetBlockBlobReference(GetRandomBlobNameCompany(files[i].FileName, userId));
 				blob.Properties.ContentType = "image/jpeg";
 				using (var stream = files[i].OpenReadStream())
 				{
 					await blob.UploadFromStreamAsync(stream);
-
-                }
+				}
+				toReturn = blob.StorageUri.PrimaryUri.ToString();
 			}
+			return toReturn;
 		}
 
-		/// <summary> 
-		/// string GetRandomBlobName(string filename): Generates a unique random file name to be uploaded
-        /// TODO: update the string format to support the resume and profile image(assuming there is a profile image)
-		/// </summary> 
-		private string GetRandomBlobNameCustomer(string filename)
+		private string GetRandomBlobNameCompany(string filename, string userId)
 		{
 			string ext = Path.GetExtension(filename);
-			return string.Format("customer/{0:10}_{1}{2}", DateTime.Now.Ticks, Guid.NewGuid(), ext);
+			return string.Format("company/" + userId + "/" + "{0:10}_{1}{2}", DateTime.Now.Ticks, Guid.NewGuid(), ext);
 		}
 	}
 }

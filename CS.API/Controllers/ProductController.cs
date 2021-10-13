@@ -83,14 +83,14 @@ namespace CS.API.Controllers
         #endregion
 
         #region Delete
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteProduct([FromQuery] Guid productId)
+        [HttpPut("delete")]
+        public async Task<IActionResult> DeleteProduct([FromBody] Product product)
         {
             try
             {
-                if (productId != null)
+                if (product != null)
                 {
-                    var response = await ProductHandler.DeleteProduct(productId);
+                    var response = await ProductHandler.DeleteProduct(product);
                     if (response != null)
                     {
                         return Ok(response);
