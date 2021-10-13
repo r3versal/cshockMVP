@@ -90,24 +90,6 @@ namespace CS.API.Services
 			ext = Path.GetExtension(filename);
 			return string.Format("productphotos/" + productVariantId, DateTime.Now.Ticks, Guid.NewGuid(), ext);
 		}
-
-		public async Task<string> UploadAsyncCompany(IFormFileCollection files, string productVariantId)
-		{
-			var blobContainer = await _azureBlobConnectionFactory.GetBlobContainer();
-			var toReturn = "";
-
-			for (int i = 0; i < files.Count; i++)
-			{
-				var blob = blobContainer.GetBlockBlobReference(GetRandomBlobNameCompany(files[i].FileName, productVariantId));
-				blob.Properties.ContentType = "image/jpeg";
-				using (var stream = files[i].OpenReadStream())
-				{
-					await blob.UploadFromStreamAsync(stream);
-				}
-				toReturn = blob.StorageUri.PrimaryUri.ToString();
-			}
-			return toReturn;
-		}
 	}
 }
 
