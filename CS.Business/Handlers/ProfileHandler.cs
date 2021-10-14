@@ -17,19 +17,22 @@ namespace CS.Business.Handlers
                 //insert profile
                 using (var conn = Business.Database.Connection)
                 {
-                    var newProfile = await conn.QueryAsync<Profile>("SELECT * FROM Profile WHERE userId = " + userId);
+                    string queryString = "SELECT * FROM CustomerProfile WHERE userId = '" + userId + "'";
+                    var newProfile = await conn.QueryAsync<CustomerProfile>(queryString);
                     if (newProfile.Count() > 0)
                     {
                         //get measurements
-                        var measurements = await conn.QueryAsync<Measurements>("SELECT * FROM Profile WHERE userId = " + userId);
-                        var returnedProfile = newProfile.AsList()[0];
+                        var measurements = await conn.QueryAsync<Measurements>("SELECT * FROM Measurements WHERE userId = '" + userId + "'");
+                        var customerProfile = newProfile.AsList()[0];
+                        Profile returnedProfile = new Profile();
+                        returnedProfile.customerProfile = customerProfile;
                         if(measurements.AsList().Count > 0)
                         {
                             returnedProfile.profileMeasurements = measurements.AsList()[0];
                         }
 
                         //get order history
-                        var orders = await conn.QueryAsync<Order>("SELECT * FROM orders WHERE userId = " + userId);
+                        var orders = await conn.QueryAsync<Order>("SELECT * FROM orders WHERE userId = '" + userId + "'");
                         if (orders.AsList().Count > 0)
                         {
                             returnedProfile.orderHistory = orders.AsList();
@@ -54,7 +57,16 @@ namespace CS.Business.Handlers
                     profile.updatedOn = DateTime.UtcNow;
                     var newProfile = await conn.QueryAsync<CustomerProfile>("ProfileInsert", new
                     {
-                        profile
+                        profile.CustomerProfileId,
+                        profile.UserId,
+                        profile.Email,
+                        profile.FirstName,
+                        profile.LastName,
+                        profile.Birthdate,
+                        profile.Gender,
+                        profile.InstagramHandle,
+                        profile.createdOn,
+                        profile.updatedOn
                     },
                      commandType: CommandType.StoredProcedure);
                     if (newProfile.Count() > 0)
@@ -76,7 +88,19 @@ namespace CS.Business.Handlers
                 using (var conn = Business.Database.Connection)
                 {
                     profile.updatedOn = DateTime.UtcNow;
-                    var updatedProfile = await conn.QueryAsync<CustomerProfile>("ProfileUpdate", profile, commandType: CommandType.StoredProcedure);
+                    var updatedProfile = await conn.QueryAsync<CustomerProfile>("ProfileUpdate", new
+                    {
+                        profile.CustomerProfileId,
+                        profile.UserId,
+                        profile.Email,
+                        profile.FirstName,
+                        profile.LastName,
+                        profile.Birthdate,
+                        profile.Gender,
+                        profile.InstagramHandle,
+                        profile.updatedOn
+                    },
+                     commandType: CommandType.StoredProcedure);
 
                     if (updatedProfile.Count() > 0)
                     {

@@ -58,23 +58,23 @@ namespace EVR.API.Controllers
 			{
 				if (objFile.files.Count > 0)
 				{
-					var data = objFile.users;
+					var data = objFile.productPhotoData;
 
-					ProductPhoto item = Newtonsoft.Json.JsonConvert.DeserializeObject<ProductPhoto>(data);
-
+					ProductPhoto itemContainer = JsonConvert.DeserializeObject<ProductPhoto>(data);
+					ProductPhoto item = itemContainer;
 					item.productPhotoId = Guid.NewGuid();
+
 					var files = objFile.files;
 					string fileName = files[0].FileName;
 
 					string uri = await _azureBlobService.UploadAsyncProductPhoto(files, item.productVariantId.ToString());
 					item.PhotoURL = uri;
-					//Create candidatemediafilemapping row call candidate handler pass uri
 					await ProductHandler.CreateProductPhotoMediaFile(item);
 					return Ok("Image successfully uploaded");
 				}
 				else
 				{
-					return StatusCode(505, "EVR API Error: No files were recieved for upload, upload failed");
+					return StatusCode(505, "CS API Error: No files were recieved for upload, upload failed");
 				}
 			}
 			catch (Exception ex)
@@ -85,45 +85,13 @@ namespace EVR.API.Controllers
 		}
 		#endregion
 
-		//#region Delete Image
-		//[HttpPost("delete-media-candidate")]
-		//public async Task<IActionResult> DeleteBlob([FromBody] CMFMDeleteRequest cmfm)
-		//{
-
-		//	if (cmfm != null)
-		//	{
-		//		Guid userId = cmfm.userId;
-		//		string isResume = cmfm.isResume;
-
-		//		try
-		//		{
-		//			var existingMediaFile = await CandidateHandler.CheckCandidateMediaFile(userId, isResume);
-		//			if (existingMediaFile != null)
-		//			{
-		//				await CandidateHandler.DeleteCandidateMediaFile(userId, isResume);
-		//				await _azureBlobService.DeleteAsync(existingMediaFile.MediafileLink, userId.ToString(), isResume);
-		//				return Ok("File was successfully deleted");
-		//			}
-		//			return Ok("Existing file not found");
-
-		//		}
-		//		catch (Exception ex)
-		//		{
-		//			string errorMessage = handleCatch(ex);
-		//			return StatusCode(505, errorMessage);
-		//		}
-		//	}
-		//	return StatusCode(505, "EVR API Message: Missing fileUri, unable to delete image");
-		//}
-		//#endregion
-
 		#region Handle Catch (Logs error in logger, sends email to Admin and returns error 505)
 		private string handleCatch(Exception ex)
 		{
 			var st = new StackTrace(ex, true);
 			var frame = st.GetFrame(0);
 			var line = frame.GetFileLineNumber();
-			string m = "EVR API Exception: " + ex.Message + "Error Line: " + line;
+			string m = "CS API Exception: " + ex.Message + "Error Line: " + line;
 			Logger.LogError(m);
 
 			return m;

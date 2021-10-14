@@ -108,7 +108,6 @@ namespace CS.API.Controllers
 
         #region Get All Products
         [HttpGet("get-all")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAllProducts()
         {
             try

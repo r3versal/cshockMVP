@@ -7,6 +7,6 @@ namespace CS.API.Models
     {
         public int Id { get; set; }
         public IFormFileCollection files { get; set; }
-        public string users { get; set; }
+        public string productPhotoData { get; set; }
     }
 }

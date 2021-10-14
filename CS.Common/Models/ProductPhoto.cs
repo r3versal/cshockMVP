@@ -11,5 +11,6 @@ namespace CS.Common.Models
         public string photoTitle { get; set; }
         public bool isSwatch { get; set; }
         public bool isActive { get; set; }
+        public DateTime createdOn { get; set; }
     }
 }

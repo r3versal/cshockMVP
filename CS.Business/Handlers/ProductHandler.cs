@@ -28,7 +28,28 @@ namespace CS.Business.Handlers
                         product.ProductId = Guid.NewGuid();
                     }
                     product.ProductVariantId = Guid.NewGuid();
-                    var newProduct = await conn.QueryAsync<Product>("ProductInsert", new{ product }, commandType: CommandType.StoredProcedure);
+                    var newProduct = await conn.QueryAsync<Product>("ProductInsert", new {
+
+                        product.ProductId,
+                        product.ProductVariantId,
+                        product.IsFeatured,
+                        product.Active,
+                        product.IsDiscount,
+                        product.Price,
+                        product.StockQuantity,
+                        product.IsAlteration,
+                        product.IsVirtualFitting,
+                        product.IsFitting,
+                        product.StripePriceId,
+                        product.ProductDescription,
+                        product.productTitle,
+                        product.ProductCareInstructions,
+                        product.productDescriptionShort,
+                        product.SKU,
+                        product.createdOn,
+                        product.updatedOn
+
+                    }, commandType: CommandType.StoredProcedure);
                     var returnedProduct = newProduct.AsList()[0];
                     if (newProduct.Count() > 0)
                     {
@@ -53,7 +74,28 @@ namespace CS.Business.Handlers
                 product.updatedOn = DateTime.UtcNow;
                 using (var conn = Business.Database.Connection)
                 {
-                    var newProduct = await conn.QueryAsync<Product>("ProductUpdate", new { product }, commandType: CommandType.StoredProcedure);
+                    var newProduct = await conn.QueryAsync<Product>("ProductUpdate", new
+                    {
+
+                        product.ProductId,
+                        product.ProductVariantId,
+                        product.IsFeatured,
+                        product.Active,
+                        product.IsDiscount,
+                        product.Price,
+                        product.StockQuantity,
+                        product.IsAlteration,
+                        product.IsVirtualFitting,
+                        product.IsFitting,
+                        product.StripePriceId,
+                        product.ProductDescription,
+                        product.productTitle,
+                        product.ProductCareInstructions,
+                        product.productDescriptionShort,
+                        product.SKU,
+                        product.updatedOn
+
+                    }, commandType: CommandType.StoredProcedure);
                     var returnedProduct = newProduct.AsList()[0];
                     if (newProduct.Count() > 0)
                     {
@@ -169,10 +211,10 @@ namespace CS.Business.Handlers
         {
             using (var conn = Business.Database.Connection)
             {
-                var newProductPhoto = await conn.QueryAsync<ProductPhoto>("ProductPhotoInsert", new
-                {
-                    productPhoto
-                },
+                productPhoto.createdOn = DateTime.UtcNow;
+                productPhoto.productPhotoId = Guid.NewGuid();
+
+                var newProductPhoto = await conn.QueryAsync<ProductPhoto>("ProductPhotoInsert", productPhoto,
                      commandType: CommandType.StoredProcedure);
                 if (newProductPhoto.Count() > 0)
                 {

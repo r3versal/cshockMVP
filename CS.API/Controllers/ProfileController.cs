@@ -66,7 +66,7 @@ namespace CS.API.Controllers
         #endregion
 
         #region Update Profile By UserId
-        [HttpPut("profile-by-userId")]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateProfileByUserId([FromBody] CustomerProfile profile)
         {
             try
