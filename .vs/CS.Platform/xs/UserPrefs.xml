@@ -1,13 +1,15 @@
 ﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.API/Controllers/CustomerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.API/Controllers/ProductController.cs">
     <Files>
       <File FileName="CS.API/Controllers/BlobController.cs" Line="64" Column="1" />
       <File FileName="CS.API/Models/FileUpload.cs" Line="10" Column="35" />
       <File FileName="CS.API/Services/AzureBlobService.cs" Line="84" Column="1" />
       <File FileName="CS.Business/Handlers/ProductHandler.cs" Line="216" Column="1" />
       <File FileName="CS.Common/Models/ProductPhoto.cs" Line="13" Column="43" />
-      <File FileName="CS.API/Controllers/CustomerController.cs" Line="65" Column="1" />
+      <File FileName="CS.API/Controllers/CustomerController.cs" Line="213" Column="40" />
+      <File FileName="CS.API/Controllers/ProfileController.cs" Line="1" Column="1" />
+      <File FileName="CS.API/Controllers/ProductController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +18,7 @@
             <Node name="API" expanded="True">
               <Node name="CS.API" expanded="True">
                 <Node name="Controllers" expanded="True">
-                  <Node name="CustomerController.cs" selected="True" />
+                  <Node name="ProductController.cs" selected="True" />
                 </Node>
                 <Node name="Models" expanded="True" />
                 <Node name="Security" expanded="True" />
@@ -37,9 +39,7 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/Carmen/repos/cshockMVP/CS.API/Controllers/ProfileController.cs" relfile="CS.API/Controllers/ProfileController.cs" line="102" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
