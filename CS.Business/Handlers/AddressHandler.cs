@@ -12,14 +12,28 @@ namespace CS.Business.Handlers
     {
         public static async Task<CustomerAddress> InsertAddress(CustomerOrderDataModel codm)
         {
-            CustomerAddress a = codm.customerAddress;
+            CustomerAddress a = new CustomerAddress();
+            a.Address1 = codm.shippingAddress.Address1;
+            a.Address2 = codm.shippingAddress.Address2;
+            a.City = codm.shippingAddress.City;
+            a.Country = codm.shippingAddress.Country;
+            a.PhoneNumber = codm.shippingAddress.PhoneNumber;
+            a.FirstName = codm.shippingAddress.FirstName;
+            a.LastName = codm.shippingAddress.LastName;
+            a.Zipcode = codm.shippingAddress.Zipcode;
+            a.Province = codm.shippingAddress.Province;
+
+            a.customerAddressId = Guid.NewGuid();
+            a.CreatedOn = DateTime.UtcNow;
+            a.UpdatedOn = DateTime.UtcNow;
+            a.userId = codm.userId;
 
             using (var conn = Database.Connection)
             {
                 var newAddress = await conn.QueryAsync<CustomerAddress>("CustomerAddressInsert", new
                 {
                     a.customerAddressId,
-                    codm.userId,
+                    a.userId,
                     a.FirstName,
                     a.LastName,
                     a.PhoneNumber,
@@ -28,7 +42,9 @@ namespace CS.Business.Handlers
                     a.City,
                     a.Province,
                     a.Country,
-                    a.Zipcode
+                    a.Zipcode,
+                    a.UpdatedOn,
+                    a.CreatedOn
 
                 }, commandType: CommandType.StoredProcedure);
 

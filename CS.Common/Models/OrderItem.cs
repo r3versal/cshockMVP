@@ -11,6 +11,7 @@ namespace CS.Common.Models
         public DateTime UpdatedOn { get; set; }
         public Guid OrderId { get; set; }
         public Guid ProductId { get; set; }
+        public Guid ProductVariantId { get; set; }
         //public string
 
         public OrderItemStatus orderItemStatus { get; set; }

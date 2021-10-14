@@ -70,30 +70,48 @@ namespace CS.API.Controllers
 
                 if (customerDataModel != null)
                 {
-                    var customer = await CustomerHandler.InsertCustomer(customerDataModel);
-                    if (customer == null)
+                    if (customerDataModel.isNewCustomer)
                     {
-                        return StatusCode(505, "An unexpected error has ocurred, unable to create Customer");
+                        var customer = await CustomerHandler.InsertCustomer(customerDataModel);
+                        if (customer == null)
+                        {
+                            return StatusCode(505, "An unexpected error has ocurred, unable to create Customer");
+                        }
+                        customerDataModel.userId = customer.UserId;
+                        newCODM.userId = customer.UserId;
+
+                        var measurements = await MeasurementsHandler.InsertMeasurments(customerDataModel, customer.MeasurementsId, customerDataModel.measurements.UserId);
+                        if (measurements == null)
+                        {
+                            return StatusCode(505, "An unexpected error has ocurred, unable to create Customer measurements");
+                        }
+                        else
+                        {
+                            newCODM.measurements = measurements;
+                        }
+                    }
+
+                    if (customerDataModel.isGuest)
+                    {
+                        customerDataModel.order.isMemberCheckout = false;
+                    }
+
+                    if (customerDataModel.isExistingCustomer)
+                    {
+
+                        customerDataModel.order.isMemberCheckout = true;
                     }
 
                     var address = await AddressHandler.InsertAddress(customerDataModel);
                     if (address == null)
                     {
-                        return StatusCode(505, "An unexpected error has ocurred, unable to create Customer");
+                        return StatusCode(505, "An unexpected error has ocurred, unable to insert address");
                     }
-
-                    var measurements = await MeasurementsHandler.InsertMeasurments(customerDataModel, customer.MeasurementsId, customerDataModel.measurements.UserId);
-                    if (measurements == null)
-                    {
-                        return StatusCode(505, "An unexpected error has ocurred, unable to create Customer measurements");
-                    }
-                    else
-                    {
-                        newCODM.measurements = measurements;
-                    }
-
-                    var order = await CustomerHandler.InsertCustomerOrder(customerDataModel, customer.CustomerId);
-                    if (measurements == null)
+                    newCODM.shippingAddress = address;
+                    customerDataModel.shippingAddress = address;
+                    
+                    var order = await CustomerHandler.InsertCustomerOrder(customerDataModel);
+                    if (order == null)
                     {
                         return StatusCode(505, "An unexpected error has ocurred, unable to complete order");
                     }

@@ -5,6 +5,8 @@ namespace CS.Common.Models
 {
     public class Order
     {
+        public string email { get; set; }
+        public bool isMemberCheckout { get; set; }
         public Guid OrderId { get; set; }
         public Guid ReviewId { get; set; }
         public string OrderNumber { get; set; }
