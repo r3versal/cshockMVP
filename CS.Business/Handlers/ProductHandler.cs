@@ -101,6 +101,10 @@ namespace CS.Business.Handlers
                     {
                         if (product.productMeasurements != null)
                         {
+                            if(product.productMeasurements.productMeasurementsId == null || product.productMeasurements.productMeasurementsId == Guid.Empty)
+                            {
+                                product.productMeasurements.productMeasurementsId = Guid.NewGuid();
+                            }
                             var newMeasurements = await conn.QueryAsync<ProductMeasurements>("ProductMeasurementsUpdate", product.productMeasurements, commandType: CommandType.StoredProcedure);
                             returnedProduct.productMeasurements = newMeasurements.AsList()[0];
                         }
