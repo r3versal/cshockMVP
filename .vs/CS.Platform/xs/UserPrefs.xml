@@ -1,13 +1,15 @@
 ﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Business/Handlers/AddressHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Business/Handlers/ProductHandler.cs">
     <Files>
-      <File FileName="CS.API/Controllers/CustomerController.cs" Line="104" Column="1" />
-      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="23" Column="39" />
+      <File FileName="CS.API/Controllers/CustomerController.cs" Line="99" Column="1" />
+      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="92" Column="42" />
       <File FileName="CS.Common/Models/CustomerOrderDataModel.cs" Line="12" Column="61" />
-      <File FileName="CS.Business/Handlers/AddressHandler.cs" Line="15" Column="54" />
+      <File FileName="CS.Business/Handlers/AddressHandler.cs" Line="20" Column="62" />
       <File FileName="CS.Common/Models/OrderItem.cs" Line="23" Column="47" />
-      <File FileName="CS.Common/Models/CustomerAddress.cs" Line="4" Column="18" />
+      <File FileName="CS.Common/Models/CustomerAddress.cs" Line="8" Column="26" />
+      <File FileName="CS.Common/Models/Product.cs" Line="1" Column="1" />
+      <File FileName="CS.Business/Handlers/ProductHandler.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -22,7 +24,7 @@
               </Node>
               <Node name="CS.Business" expanded="True">
                 <Node name="Handlers" expanded="True">
-                  <Node name="AddressHandler.cs" selected="True" />
+                  <Node name="ProductHandler.cs" selected="True" />
                 </Node>
               </Node>
               <Node name="CS.Common" expanded="True">
@@ -37,10 +39,7 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/Carmen/repos/cshockMVP/CS.API/Controllers/CustomerController.cs" relfile="CS.API/Controllers/CustomerController.cs" line="73" column="1" />
-      <Breakpoint file="/Users/Carmen/repos/cshockMVP/CS.Business/Handlers/AddressHandler.cs" relfile="CS.Business/Handlers/AddressHandler.cs" line="15" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
