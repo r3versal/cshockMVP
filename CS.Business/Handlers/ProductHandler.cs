@@ -55,7 +55,7 @@ namespace CS.Business.Handlers
                     {
                         if(product.productMeasurements != null)
                         {
-                            var newMeasurements = await conn.QueryAsync<ProductMeasurements>("ProductMeasurementsInsert", new { product.productMeasurements }, commandType: CommandType.StoredProcedure);
+                            var newMeasurements = await conn.QueryAsync<ProductMeasurements>("ProductMeasurementsInsert", product.productMeasurements, commandType: CommandType.StoredProcedure);
                             returnedProduct.productMeasurements = newMeasurements.AsList()[0];
                         }
 
@@ -109,6 +109,11 @@ namespace CS.Business.Handlers
                             if(newMeasurements.AsList().Count() > 0)
                             {
                                 returnedProduct.productMeasurements = newMeasurements.AsList()[0];
+                            }
+                            else
+                            {
+                                var newMeasurements1 = await conn.QueryAsync<ProductMeasurements>("ProductMeasurementsInsert", product.productMeasurements, commandType: CommandType.StoredProcedure);
+                                returnedProduct.productMeasurements = newMeasurements1.AsList()[0];
                             }
                         }
 
