@@ -96,7 +96,7 @@ namespace CS.Business.Handlers
             }
             udm.CreatedOnUtc = d;
             udm.CreatedBy = "CS.API";
-            udm.UpdatedBy = "EVR.API";
+            udm.UpdatedBy = "CS.API";
             udm.UpdatedOnUtc = d;
             udm.AccessFailedCount = 0;
 
