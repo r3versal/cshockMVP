@@ -27,10 +27,10 @@ namespace EVR.API.Controllers
 	{
 		private readonly IAzureBlobService _azureBlobService;
 		private IConfiguration Configuration;
-		private ILogger<ProductController> Logger;
+		private ILogger<AdminController> Logger;
 		private readonly AppSettings _appSettings;
 
-		public BlobController(IAzureBlobService azureBlobService, IConfiguration config, ILogger<ProductController> logger, IOptions<AppSettings> appSettings)
+		public BlobController(IAzureBlobService azureBlobService, IConfiguration config, ILogger<AdminController> logger, IOptions<AppSettings> appSettings)
 		{
 			_azureBlobService = azureBlobService;
 			Configuration = config;

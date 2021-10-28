@@ -86,7 +86,7 @@ namespace CS.API.Security
             var options = new TokenProviderOptions
             {
                 Audience = "User",
-                Issuer = "EVRAPI",
+                Issuer = "CSAPI",
                 SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
             };
 
