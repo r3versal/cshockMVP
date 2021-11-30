@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Business/Handlers/MeasurementsHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.API/Controllers/AdminController.cs">
     <Files>
       <File FileName="CS.API/Controllers/ProductController.cs" Line="149" Column="62" />
       <File FileName="CS.Business/Handlers/ProductHandler.cs" Line="187" Column="22" />
-      <File FileName="CS.API/Controllers/CustomerController.cs" Line="143" Column="64" />
+      <File FileName="CS.API/Controllers/CustomerController.cs" Line="227" Column="76" />
       <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="156" Column="39" />
       <File FileName="CS.Common/Models/CustomerDataModel.cs" Line="6" Column="21" />
       <File FileName="CS.Common/Models/Measurements.cs" Line="4" Column="18" />
       <File FileName="CS.Common/Models/Customer.cs" Line="4" Column="18" />
-      <File FileName="CS.Business/Handlers/MeasurementsHandler.cs" Line="90" Column="58" />
+      <File FileName="CS.Business/Handlers/MeasurementsHandler.cs" Line="94" Column="82" />
+      <File FileName="CS.API/Controllers/UserController.cs" Line="1" Column="1" />
+      <File FileName="CS.API/Controllers/AdminController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,15 +19,15 @@
           <Node name="CS.Platform" expanded="True">
             <Node name="API" expanded="True">
               <Node name="CS.API" expanded="True">
-                <Node name="Controllers" expanded="True" />
+                <Node name="Controllers" expanded="True">
+                  <Node name="AdminController.cs" selected="True" />
+                </Node>
                 <Node name="Models" expanded="True" />
                 <Node name="Security" expanded="True" />
                 <Node name="Services" expanded="True" />
               </Node>
               <Node name="CS.Business" expanded="True">
-                <Node name="Handlers" expanded="True">
-                  <Node name="MeasurementsHandler.cs" selected="True" />
-                </Node>
+                <Node name="Handlers" expanded="True" />
               </Node>
               <Node name="CS.Common" expanded="True">
                 <Node name="Models" expanded="True" />

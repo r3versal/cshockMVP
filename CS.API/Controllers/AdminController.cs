@@ -49,6 +49,11 @@ namespace CS.API.Controllers
                         Logger.LogInformation("User authentication failed: " + request.Email);
                         return Unauthorized();
                     }
+                    if (!user.IsSystemAccount)
+                    {
+                        Logger.LogInformation("User is not a system account: " + request.Email);
+                        return Unauthorized();
+                    }
                     Logger.LogInformation("User authenticated");
                     var jwt = JwtSecurity.GenerateToken(user.UserId, user.Email);
 
