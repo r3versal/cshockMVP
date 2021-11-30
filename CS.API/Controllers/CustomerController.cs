@@ -132,31 +132,31 @@ namespace CS.API.Controllers
         }
         #endregion
 
-        #region Update Customer
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateCustomer([FromBody] CustomerDataModel customerDataModel)
-        {
-            try
-            {
-                if (customerDataModel != null)
-                {
-                    var customer = await CustomerHandler.UpdateCustomer(customerDataModel);
-                    if (customer == null)
-                    {
-                        return StatusCode(505, "An unexpected error has ocurred, unable to update Customer");
-                    }
-                    Logger.LogWarning("Customer updated");
-                    return Ok(customer);
-                }
-                return StatusCode(404);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError(ex.ToString());
-                return StatusCode(505, ex.Message);
-            }
-        }
-        #endregion
+        //#region Update Customer
+        //[HttpPut("update")]
+        //public async Task<IActionResult> UpdateCustomer([FromBody] CustomerDataModel customerDataModel)
+        //{
+        //    try
+        //    {
+        //        if (customerDataModel != null)
+        //        {
+        //            var customer = await CustomerHandler.UpdateCustomer(customerDataModel);
+        //            if (customer == null)
+        //            {
+        //                return StatusCode(505, "An unexpected error has ocurred, unable to update Customer");
+        //            }
+        //            Logger.LogWarning("Customer updated");
+        //            return Ok(customer);
+        //        }
+        //        return StatusCode(404);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.LogError(ex.ToString());
+        //        return StatusCode(505, ex.Message);
+        //    }
+        //}
+        //#endregion
 
         #region Delete Customer
         [HttpDelete("Delete")]
@@ -217,7 +217,7 @@ namespace CS.API.Controllers
         #endregion
 
         #region Get Customer Profile
-        [HttpPost("update")]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateCustomer([FromBody] Measurements measurements)
         {
             try

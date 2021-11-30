@@ -181,7 +181,19 @@ namespace CS.Business.Handlers
                 using (var conn = Business.Database.Connection)
                 {
                     var product = await conn.QueryAsync<Product>("SELECT * FROM Product WHERE productId = '" + productId + "'");
-                    return product.AsList()[0];
+
+
+                    if (product.AsList().Count() > 0)
+                    {
+                        var prodMeas = await conn.QueryAsync<ProductMeasurements>("SELECT * FROM ProductMeasurements WHERE productId = '" + productId + "'");
+
+                        if (prodMeas.AsList().Count() > 0)
+                        {
+                            product.AsList()[0].productMeasurements = prodMeas.AsList()[0];
+                        }
+                        return product.AsList()[0];
+                    }
+                    else { return null; }
                 }
             }
             return null;

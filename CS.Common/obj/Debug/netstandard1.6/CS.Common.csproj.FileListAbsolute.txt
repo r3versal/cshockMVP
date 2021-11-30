@@ -24,3 +24,13 @@
 /Users/Carmen/repos/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.csproj.CoreCompileInputs.cache
 /Users/Carmen/repos/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.dll
 /Users/Carmen/repos/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.pdb
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/bin/Debug/netstandard1.6/CS.Common.deps.json
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/bin/Debug/netstandard1.6/CS.Common.dll
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/bin/Debug/netstandard1.6/CS.Common.pdb
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.csproj.AssemblyReference.cache
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.GeneratedMSBuildEditorConfig.editorconfig
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.AssemblyInfoInputs.cache
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.AssemblyInfo.cs
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.csproj.CoreCompileInputs.cache
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.dll
+/Users/carmen/Documents/GitHub/cshockMVP/CS.Common/obj/Debug/netstandard1.6/CS.Common.pdb

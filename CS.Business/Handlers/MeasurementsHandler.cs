@@ -91,7 +91,7 @@ namespace CS.Business.Handlers
         {
             using (var conn = Business.Database.Connection)
             {
-                var mea = await conn.QueryAsync<Measurements>("UpdateMeasurements", new
+                var mea = await conn.QueryAsync<Measurements>("MeasurementsUpdate", new
                 {
                     m.UserId,
                     m.bust,
