@@ -182,10 +182,7 @@ namespace CS.Business.Handlers
                     m.bicep,
                     m.elbow,
                     m.wrist,
-                    m.aroundHand,
-                    m.crotch,
-                    m.inseam,
-                    m.outseam
+                    m.aroundHand
                 },
                     commandType: CommandType.StoredProcedure);
                 if (mea.Count() > 0)

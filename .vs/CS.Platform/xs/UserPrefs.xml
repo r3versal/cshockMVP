@@ -1,10 +1,14 @@
 ﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Business/Handlers/ProductHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Business/Handlers/MeasurementsHandler.cs">
     <Files>
       <File FileName="CS.Common/Models/ProductMeasurements.cs" Line="11" Column="45" />
       <File FileName="CS.Business/Handlers/MeasurementsHandler.cs" Line="188" Column="30" />
-      <File FileName="CS.Business/Handlers/ProductHandler.cs" Line="1" Column="1" />
+      <File FileName="CS.Business/Handlers/ProductHandler.cs" Line="194" Column="52" />
+      <File FileName="CS.API/Controllers/CustomerController.cs" Line="143" Column="74" />
+      <File FileName="CS.API/Controllers/ProfileController.cs" Line="76" Column="66" />
+      <File FileName="CS.Business/Handlers/ProfileHandler.cs" Line="82" Column="51" />
+      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,7 +23,7 @@
               </Node>
               <Node name="CS.Business" expanded="True">
                 <Node name="Handlers" expanded="True">
-                  <Node name="ProductHandler.cs" selected="True" />
+                  <Node name="MeasurementsHandler.cs" selected="True" />
                 </Node>
               </Node>
               <Node name="CS.Common" expanded="True">
