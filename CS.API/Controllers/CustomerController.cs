@@ -80,10 +80,15 @@ namespace CS.API.Controllers
                         customerDataModel.userId = customer.UserId;
                         newCODM.userId = customer.UserId;
 
-                        var measurements = await MeasurementsHandler.InsertMeasurments(customerDataModel, customer.MeasurementsId, customerDataModel.measurements.UserId);
+                        Measurements measurements = await MeasurementsHandler.UpdateMeasurements(customerDataModel.measurements);
                         if (measurements == null)
                         {
-                            return StatusCode(505, "An unexpected error has ocurred, unable to create Customer measurements");
+                            measurements = await MeasurementsHandler.InsertMeasurments(customerDataModel, customer.MeasurementsId, customerDataModel.measurements.UserId);
+
+                            if (measurements == null)
+                            {
+                                return StatusCode(505, "An unexpected error has ocurred, unable to create Customer measurements");
+                            }
                         }
                         else
                         {
@@ -224,7 +229,7 @@ namespace CS.API.Controllers
             {
                 if (measurements != null && measurements.UserId != Guid.Empty && measurements.UserId != null)
                 {
-                    var customerProfile = await MeasurementsHandler.UpdateMeasurements(measurements);
+                    var customerProfile = await MeasurementsHandler.UpsertMeasurements(measurements);
 
                     return Ok(customerProfile);
                 }

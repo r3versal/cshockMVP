@@ -58,9 +58,6 @@ namespace CS.Business.Handlers
                 m.elbow = cdm.measurements.elbow;
                 m.wrist = cdm.measurements.wrist;
                 m.aroundHand = cdm.measurements.aroundHand;
-                m.crotch = cdm.measurements.crotch;
-                m.inseam = cdm.measurements.inseam;
-                m.outseam = cdm.measurements.outseam;
                 m.UserId = userId;
 
                 //insert measurements
@@ -106,10 +103,7 @@ namespace CS.Business.Handlers
                         m.bicep,
                         m.elbow,
                         m.wrist,
-                        m.aroundHand,
-                        m.crotch,
-                        m.inseam,
-                        m.outseam
+                        m.aroundHand
                 },
                      commandType: CommandType.StoredProcedure);
                     if (newMeasurements.Count() > 0)
@@ -191,6 +185,20 @@ namespace CS.Business.Handlers
                 }
                 return null;
             }
+        }
+
+        public static async Task<Measurements> UpsertMeasurements(Measurements m)
+        {
+            Measurements measurements = await UpdateMeasurements(m);
+            if(measurements == null)
+            {
+                CustomerOrderDataModel cdm = new CustomerOrderDataModel();
+                cdm.measurements = m;
+                Guid measurementsId = Guid.NewGuid();
+
+                measurements = await InsertMeasurments(cdm, measurementsId, m.UserId);
+            }
+            return measurements;
         }
     }
 }

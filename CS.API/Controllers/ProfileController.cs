@@ -51,6 +51,7 @@ namespace CS.API.Controllers
                     else
                     {
                         var measurements = await MeasurementsHandler.GetMeasurements(userId);
+                        profile.profileMeasurements = measurements;
                     }
                     Logger.LogWarning("Profile Found");
                     return Ok(profile);
@@ -102,7 +103,7 @@ namespace CS.API.Controllers
                     var profileUpdated = await ProfileHandler.InsertProfile(profile);
                     if (profileUpdated == null)
                     {
-                        return StatusCode(505, "Profile was not found or updated.");
+                        return StatusCode(505, "Was not able to create profile.");
                     }
                     Logger.LogWarning("Profile Found");
                     return Ok(profile);

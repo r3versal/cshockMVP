@@ -50,6 +50,12 @@ namespace CS.API.Controllers
                         return StatusCode(505, new ErrorResponse() { Message = "There is already an account associated with that email address" });
                     }
                     var user = await UserHandler.InsertUser(request.User, request.Password);
+                    CustomerProfile cp = new CustomerProfile();
+                    cp.Birthdate = DateTime.UtcNow;
+                    cp.Email = request.User.Email;
+                    cp.UserId = user.UserId;
+                    var profileUpdated = await ProfileHandler.InsertProfile(cp);
+
                     if (user == null)
                     {
                         return Unauthorized();
