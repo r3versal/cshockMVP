@@ -76,6 +76,35 @@ namespace CS.API.Controllers
         }
         #endregion
 
+        #region passwordprotected
+        [HttpGet("password-web-access")]
+        [AllowAnonymous]
+        public async Task<IActionResult> PasswordProtection([FromQuery] string password)
+        {
+            try
+            {
+                if (password != null)
+                {
+                    if (password == "MADEFORYOU")
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+
+                }
+                return StatusCode(408, new ErrorResponse() { Message = "Bad Login Request" });
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.ToString());
+                return StatusCode(505, ex.Message);
+            }
+        }
+        #endregion
+
         //TODO: add refresh token
     }
 
