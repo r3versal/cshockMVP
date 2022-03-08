@@ -2,11 +2,12 @@
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="CS.API/Controllers/AdminController.cs">
     <Files>
+      <File FileName="CS.API/appsettings.json" Line="9" Column="169" IsPinned="True" />
       <File FileName="CS.Business/Handlers/MeasurementsHandler.cs" Line="194" Column="14" />
-      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="21" Column="1" />
-      <File FileName="CS.API/Controllers/UserController.cs" />
-      <File FileName="CS.API/Controllers/CustomerController.cs" Line="92" Column="26" />
-      <File FileName="CS.API/Controllers/AdminController.cs" Line="106" Column="19" />
+      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="26" Column="1" />
+      <File FileName="CS.API/Controllers/UserController.cs" Line="37" Column="1" />
+      <File FileName="CS.API/Controllers/AdminController.cs" Line="116" Column="18" />
+      <File FileName="CS.Common/Models/SignupRequest.cs" Line="12" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -36,7 +37,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/carmen/Documents/GitHub/cshockMVP/CS.API/Controllers/AdminController.cs" relfile="CS.API/Controllers/AdminController.cs" line="115" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

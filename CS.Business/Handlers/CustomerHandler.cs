@@ -14,6 +14,18 @@ namespace CS.Business.Handlers
     public class CustomerHandler
     {
 
+        public static async Task<Customer> EmailGrabber(string email, bool fromChatbot)
+        {
+            DateTime createdOn = DateTime.UtcNow;
+            using (var conn = Business.Database.Connection)
+            {
+                await conn.ExecuteAsync("INSERT INTO EmailsOnly(email, createdOn, fromChatbot) VALUES('" + email + "','" + createdOn + "','"+ fromChatbot + "')");
+                return null;
+            }
+
+        }
+
+
         public static async Task<Customer> InsertCustomer(CustomerOrderDataModel cdm)
         {
             if (cdm != null)

@@ -105,7 +105,29 @@ namespace CS.API.Controllers
         }
         #endregion
 
-        //TODO: add refresh token
+        #region email harvestor
+        [HttpPost("email-harvestor-5000")]
+        [AllowAnonymous]
+        public async Task<IActionResult> EmailGrabber([FromBody] EmailHarvestor500Model data)
+        {
+            try
+            {
+                if (data != null)
+                {
+                  await CustomerHandler.EmailGrabber(data.Email, data.fromChatbot);
+                    return Ok();
+
+                }
+                return StatusCode(408, new ErrorResponse() { Message = "No email detected." });
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.ToString());
+                return StatusCode(505, ex.Message);
+            }
+        }
+        #endregion
+
     }
 
 }
