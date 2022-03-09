@@ -62,6 +62,7 @@ namespace CS.API.Controllers
 
         #region Create Customer
         [HttpPost("order")]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateOrder([FromBody] CustomerOrderDataModel customerDataModel)
         {
             try
