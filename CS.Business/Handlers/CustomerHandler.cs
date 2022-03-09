@@ -32,7 +32,7 @@ namespace CS.Business.Handlers
             {
                 Customer c = new Customer();
                 c.CustomerId = Guid.NewGuid();
-                c.UserId = cdm.userId;
+                c.UserId = Guid.NewGuid();
                 c.Email = cdm.measurements.email;
                 c.MeasurementsId = Guid.NewGuid();
                 c.CreatedOn = DateTime.UtcNow;
