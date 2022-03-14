@@ -80,6 +80,7 @@ namespace CS.API.Controllers
                         }
                         customerDataModel.userId = customer.UserId;
                         newCODM.userId = customer.UserId;
+                        customerDataModel.measurements.UserId = customer.UserId;
 
                         Measurements measurements = await MeasurementsHandler.UpdateMeasurements(customerDataModel.measurements);
                         if (measurements == null)

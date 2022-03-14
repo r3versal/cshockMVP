@@ -36,6 +36,7 @@ namespace CS.API.Controllers
 
         #region Create
         [HttpPost("create")]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateFitting([FromBody] Fitting fitting)
         {
             try

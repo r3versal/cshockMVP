@@ -1,12 +1,13 @@
 ﻿<Properties StartupConfiguration="{267A52B3-C004-4B20-9442-861C23EF753A}|Default">
   <MonoDevelop.Ide.ItemProperties.API.CS.API PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CS.Business/Handlers/AddressHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS.API/Controllers/SchedulerController.cs">
     <Files>
-      <File FileName="CS.API/appsettings.json" Line="9" Column="169" IsPinned="True" />
-      <File FileName="CS.Business/Handlers/MeasurementsHandler.cs" />
-      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="35" Column="43" />
-      <File FileName="CS.API/Controllers/CustomerController.cs" Line="111" Column="59" />
-      <File FileName="CS.Business/Handlers/AddressHandler.cs" Line="13" Column="51" />
+      <File FileName="CS.Business/Handlers/MeasurementsHandler.cs" Line="65" Column="1" />
+      <File FileName="CS.Business/Handlers/CustomerHandler.cs" Line="82" Column="1" />
+      <File FileName="CS.API/Controllers/CustomerController.cs" Line="107" Column="22" />
+      <File FileName="CS.Business/Handlers/AddressHandler.cs" Line="41" Column="23" />
+      <File FileName="CS.Common/Models/CustomerOrderDataModel.cs" Line="12" Column="27" />
+      <File FileName="CS.API/Controllers/SchedulerController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,15 +15,15 @@
           <Node name="CS.Platform" expanded="True">
             <Node name="API" expanded="True">
               <Node name="CS.API" expanded="True">
-                <Node name="Controllers" expanded="True" />
+                <Node name="Controllers" expanded="True">
+                  <Node name="SchedulerController.cs" selected="True" />
+                </Node>
                 <Node name="Models" expanded="True" />
                 <Node name="Security" expanded="True" />
                 <Node name="Services" expanded="True" />
               </Node>
               <Node name="CS.Business" expanded="True">
-                <Node name="Handlers" expanded="True">
-                  <Node name="AddressHandler.cs" selected="True" />
-                </Node>
+                <Node name="Handlers" expanded="True" />
               </Node>
               <Node name="CS.Common" expanded="True">
                 <Node name="Models" expanded="True" />
@@ -36,7 +37,11 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/carmen/Documents/GitHub/cshockMVP/CS.API/Controllers/CustomerController.cs" relfile="CS.API/Controllers/CustomerController.cs" line="78" column="1" />
+      <Breakpoint file="/Users/carmen/Documents/GitHub/cshockMVP/CS.API/Controllers/CustomerController.cs" relfile="CS.API/Controllers/CustomerController.cs" line="76" column="1" />
+      <Breakpoint file="/Users/carmen/Documents/GitHub/cshockMVP/CS.API/Controllers/CustomerController.cs" relfile="CS.API/Controllers/CustomerController.cs" line="112" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
