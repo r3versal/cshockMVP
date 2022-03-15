@@ -114,7 +114,7 @@ namespace CS.API.Controllers
             {
                 if (data != null)
                 {
-                  await CustomerHandler.EmailGrabber(data.Email, data.fromChatbot);
+                  await CustomerHandler.EmailGrabber(data.Email, data.fromChatbot, data.requestCode, data.newSubscriber);
                     return Ok();
 
                 }

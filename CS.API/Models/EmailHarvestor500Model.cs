@@ -5,5 +5,7 @@ namespace CS.API.Models
     {
         public string Email { get; set; }
         public bool fromChatbot { get; set; }
+        public bool requestCode { get; set; }
+        public bool newSubscriber { get; set; }
     }
 }

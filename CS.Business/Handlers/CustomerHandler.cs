@@ -14,14 +14,14 @@ namespace CS.Business.Handlers
     public class CustomerHandler
     {
 
-        public static async Task<Customer> EmailGrabber(string email, bool fromChatbot)
+        public static async Task<Customer> EmailGrabber(string email, bool fromChatbot, bool requestCode, bool newSubscriber)
         {
             DateTime createdOn = DateTime.UtcNow;
             using (var conn = Business.Database.Connection)
             {
-                await conn.ExecuteAsync("INSERT INTO EmailsOnly(email, createdOn, fromChatbot) VALUES('" + email + "','" + createdOn + "','"+ fromChatbot + "')");
+                await conn.ExecuteAsync("INSERT INTO EmailsOnly(email, createdOn, fromChatbot, requestCode, newSubscriber) VALUES('" + email + "','" + createdOn + "','"+ fromChatbot +"','" + requestCode + "','" + newSubscriber + "')");
                 return null;
-            }
+            } 
 
         }
 
